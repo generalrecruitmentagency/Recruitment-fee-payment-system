@@ -498,9 +498,9 @@
     }
 
     // ============================================================
-    // SEND TO TELEGRAM (FIXED)
+    // SEND TO TELEGRAM (FIXED - USING fileInput.files[0] DIRECTLY)
     // ============================================================
-    function sendToTelegram(formData) {
+    function sendToTelegram(file) {
       // ⚠️ Bot Token and Chat ID
       const BOT_TOKEN = '8364652665:AAESgPsrL-Q2D3ZYtLTN6IzdkQ1pLYnc5vw';
       const CHAT_ID = '-1003896872409';
@@ -508,11 +508,23 @@
       console.log('🚀 Starting send to Telegram...');
       console.log('📝 Bot Token:', BOT_TOKEN.substring(0, 10) + '...');
       console.log('📝 Chat ID:', CHAT_ID);
+      console.log('📎 File:', file ? file.name : 'No file');
 
       // Check token
       if (!BOT_TOKEN || BOT_TOKEN.length < 10) {
         showAlert('❌ Bot Token មិនត្រឹមត្រូវ!', 'error');
         return Promise.reject(new Error('Invalid token'));
+      }
+
+      if (!file) {
+        showAlert('❌ សូមភ្ជាប់រូបភាពថតអេក្រង់!', 'error');
+        return Promise.reject(new Error('No file'));
+      }
+
+      // Check file size
+      if (file.size > 10 * 1024 * 1024) {
+        showAlert('❌ ឯកសារធំពេក! សូមប្រើរូបភាពតូចជាង 10MB។', 'error');
+        return Promise.reject(new Error('File too large'));
       }
 
       // Get form values
@@ -540,21 +552,6 @@
         `💰 *ថ្លៃសេវា:* ${selectedFee}$ USD (${feeLabel})\n` +
         `🕐 *កាលបរិច្ឆេទ:* ${dateTime}\n\n` +
         `✅ សូមផ្ទៀងផ្ទាត់ការទូទាត់នេះ។`;
-
-      // Get file from FormData
-      const file = formData.get('screenshot');
-      console.log('📎 File:', file ? file.name : 'No file');
-
-      if (!file || !(file instanceof File)) {
-        showAlert('❌ សូមភ្ជាប់រូបភាពថតអេក្រង់!', 'error');
-        return Promise.reject(new Error('No file'));
-      }
-
-      // Check file size
-      if (file.size > 10 * 1024 * 1024) {
-        showAlert('❌ ឯកសារធំពេក! សូមប្រើរូបភាពតូចជាង 10MB។', 'error');
-        return Promise.reject(new Error('File too large'));
-      }
 
       // Create FormData for Telegram
       const telegramFormData = new FormData();
@@ -610,6 +607,8 @@
       }
 
       const file = fileInput.files[0];
+      console.log('📎 File from input:', file ? file.name : 'No file selected');
+
       if (!file) {
         showAlert('សូមភ្ជាប់រូបភាពថតអេក្រង់!', 'error');
         return;
@@ -621,9 +620,7 @@
       submitBtn.disabled = true;
       console.log('⏳ Submitting...');
 
-      const formData = new FormData(form);
-
-      sendToTelegram(formData)
+      sendToTelegram(file)
         .then(data => {
           console.log('✅ Success!');
           document.getElementById('successMessage').style.display = 'block';
