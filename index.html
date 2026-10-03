@@ -2,1249 +2,666 @@
 <html lang="km">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>ឆ្នោតខ្មែរ N98</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ទូទាត់ថ្លៃសេវាកម្មជ្រើសរើសបុគ្គលិក</title>
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    * { box-sizing:border-box; font-family:'Kantumruy Pro',system-ui,sans-serif; margin:0; padding:0; }
-    body { background:#f0f4f8; }
-    header { background:linear-gradient(135deg,#0078D7,#005fa3); color:white; padding:15px 20px; text-align:center; }
-    header h1 { font-size:clamp(24px,5vw,38px); font-weight:bold; margin:8px 0; }
-    header p { font-size:clamp(13px,2vw,16px); opacity:0.9; }
-    .nav-bar { background:white; padding:10px 15px; display:flex; justify-content:center; flex-wrap:wrap; gap:6px; position:sticky; top:0; z-index:100; }
-    .nav-bar a, .nav-bar button { color:#333; text-decoration:none; font-weight:bold; padding:6px 12px; border-radius:6px; font-size:clamp(12px,1.4vw,14px); cursor:pointer; border:none; background:none; }
-    .nav-bar a:hover, .nav-bar button:hover { background:#0078D7; color:white; }
-    .nav-bar a.active { background:#0078D7; color:white; }
-    .btn-share { background:linear-gradient(135deg,#ff9800,#e65100) !important; color:white !important; }
-    .btn-group { background:linear-gradient(135deg,#0088cc,#006699) !important; color:white !important; }
-    .section { padding:10px 12px; max-width:1100px; margin:0 auto; }
-    
-    .clock-box { background:#fff; border-radius:14px; padding:12px 16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; border:2px solid #0078D7; flex-wrap:wrap; gap:8px; }
-    .clock-title { color:#4a5568; font-size:clamp(11px,1.3vw,13px); font-weight:bold; }
-    .clock-time { color:#0078D7; font-size:clamp(22px,3.5vw,28px); font-weight:bold; font-family:'Courier New',monospace; }
-    .clock-date { color:#2d3748; font-size:clamp(11px,1.3vw,13px); font-weight:bold; }
-    
-    .lottery-box { background:white; padding:12px; margin:8px 0; border-radius:10px; border:1px solid #e9ecef; }
-    .time-box { font-weight:bold; color:#0078D7; font-size:clamp(14px,1.8vw,16px); display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
-    .badge { background:#0078D7; color:white; font-size:clamp(9px,1vw,10px); padding:2px 10px; border-radius:12px; }
-    .badge-completed { background:#28a745; color:white; }
-    .badge-waiting { background:#ff9800; color:white; }
-    .numbers { display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; }
-    .numbers div { background:#f8f9fa; padding:8px 4px; border-radius:6px; text-align:center; flex:1 1 calc(20% - 6px); min-width:50px; border:2px solid #e9ecef; font-weight:bold; font-size:clamp(13px,1.6vw,15px); }
-    .numbers div .letter { color:#0078D7; }
-    .number-result { color:#28a745; font-weight:bold; }
-    .pending-label { color:#dc3545; font-size:clamp(9px,1.1vw,11px); font-weight:bold; animation:blink 1.5s linear infinite; }
-    .next-label { color:#ff9800; font-size:clamp(9px,1.1vw,11px); font-weight:bold; animation:blink 1.5s linear infinite; }
-    @keyframes blink { 50%{opacity:0} }
-    
-    .bet-box { background:white; border-radius:14px; padding:14px; margin:10px 0; border:2px solid #0078D7; }
-    .bet-box h2 { color:#0078D7; font-size:clamp(16px,2.2vw,20px); border-bottom:2px solid #f0f4f8; padding-bottom:8px; margin-bottom:10px; }
-    
-    .reward-table { width:100%; border-collapse:collapse; margin-bottom:10px; border:1px solid #dee2e6; border-radius:6px; overflow:hidden; font-size:clamp(11px,1.2vw,12px); }
-    .reward-table th { background:#e8f4fd; color:#0078D7; padding:4px 6px; }
-    .reward-table td { padding:4px 6px; text-align:center; font-weight:bold; border:1px solid #dee2e6; }
-    .text-respond { color:#d63000; }
-    
-    .type-selector, .time-selector { display:flex; gap:6px; margin-bottom:8px; flex-wrap:wrap; }
-    .type-btn, .time-btn { flex:1; min-width:80px; padding:6px; border:2px solid #dee2e6; background:#fff; font-weight:bold; border-radius:6px; cursor:pointer; font-size:clamp(12px,1.3vw,13px); }
-    .type-btn.active, .time-btn.active { border-color:#0078D7; background:#e8f4fd; color:#0078D7; }
-    
-    .letter-selector { display:flex; justify-content:center; gap:5px; margin-bottom:10px; flex-wrap:wrap; }
-    .letter-circle { width:clamp(38px,5.5vw,48px); height:clamp(38px,5.5vw,48px); border-radius:50%; border:3px solid #dee2e6; background:#f8f9fa; color:#333; font-size:clamp(14px,1.8vw,17px); font-weight:bold; display:flex; align-items:center; justify-content:center; cursor:pointer; }
-    .letter-circle:hover { border-color:#0078D7; background:#e8f4fd; }
-    .letter-circle.active { background:linear-gradient(135deg,#0078D7,#005fa3); color:white; border-color:#0078D7; }
-    
-    .input-row { display:flex; gap:6px; align-items:center; margin-bottom:8px; background:#f8f9fa; padding:8px; border-radius:8px; border:1px dashed #0078D7; flex-wrap:wrap; }
-    .input-row input { flex:1 1 120px; padding:6px 10px; border:2px solid #dee2e6; border-radius:6px; font-size:clamp(13px,1.4vw,14px); font-weight:bold; min-width:80px; }
-    .input-row input:focus { border-color:#0078D7; outline:none; }
-    
-    .selected-display { display:flex; flex-wrap:wrap; gap:4px; margin:6px 0; min-height:32px; padding:6px; background:#f8f9fa; border-radius:6px; border:2px dashed #dee2e6; align-items:center; }
-    .selected-tag { background:linear-gradient(135deg,#0078D7,#005fa3); color:white; padding:3px 10px; border-radius:14px; font-size:clamp(12px,1.3vw,13px); display:inline-flex; align-items:center; gap:4px; font-weight:bold; }
-    .selected-tag .remove { cursor:pointer; font-weight:bold; color:#ff6b6b; font-size:clamp(14px,1.6vw,16px); background:rgba(255,255,255,0.2); border-radius:50%; width:16px; height:16px; display:flex; align-items:center; justify-content:center; }
-    
-    .countdown { background:#fff; padding:14px; border-radius:12px; margin:8px 0; border:3px solid #dc3545; text-align:center; }
-    .countdown .time-display { font-size:clamp(30px,5.5vw,42px); color:#dc3545; background:#fff5f5; padding:4px 14px; border-radius:8px; display:inline-block; margin-top:4px; font-weight:bold; font-family:'Courier New',monospace; }
-    .countdown .next-time { font-size:clamp(12px,1.3vw,14px); color:#4a5568; margin-top:4px; font-weight:bold; }
-    .countdown .status-time { font-size:clamp(11px,1.2vw,13px); color:#0078D7; margin-top:3px; font-weight:bold; }
-    
-    .btn { color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:clamp(12px,1.3vw,13px); margin:2px; font-weight:bold; }
-    .btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 3px 8px rgba(0,0,0,0.15); }
-    .btn:disabled { background:#ced4da !important; color:#6c757d !important; cursor:not-allowed; }
-    .btn-success { background:linear-gradient(135deg,#28a745,#1e7e34); }
-    .btn-withdraw { background:linear-gradient(135deg,#6f42c1,#5a32a3); }
-    .btn-primary { background:linear-gradient(135deg,#0078D7,#005fa3); }
-    .btn-amount { background:#17a2b8; padding:3px 8px; font-size:clamp(10px,1.1vw,12px); }
-    .btn-telegram { background:linear-gradient(135deg,#0088cc,#006699); }
-    
-    .amount-buttons { display:flex; flex-wrap:wrap; gap:3px; margin-bottom:4px; }
-    .custom-amount { display:flex; gap:5px; margin-top:6px; background:#fff; padding:6px; border-radius:8px; border:2px solid #0078D7; flex-wrap:wrap; }
-    .custom-amount input { flex:2 1 100px; padding:6px 8px; border:2px solid #e9ecef; border-radius:6px; font-size:clamp(13px,1.4vw,14px); min-width:70px; }
-    .custom-amount select { flex:1 1 70px; padding:6px; border:2px solid #e9ecef; border-radius:6px; background:#f8f9fa; color:#0078D7; }
-    
-    .bet-summary { background:linear-gradient(135deg,#f8f9fa,#e9ecef); padding:6px 10px; border-radius:6px; margin:6px 0; border:2px solid #0078D7; }
-    .bet-summary-item { display:flex; justify-content:space-between; padding:3px 0; border-bottom:1px solid #dee2e6; font-size:clamp(12px,1.3vw,13px); }
-    .bet-summary-item:last-child { border-bottom:none; }
-    .bet-summary .total { font-weight:bold; color:#d63000; font-size:clamp(14px,1.6vw,16px); }
-    
-    .guide-box { background:#eef7ff; border:1px solid #b6d4fe; padding:6px 8px; border-radius:6px; margin-bottom:8px; font-size:clamp(11px,1.2vw,12.5px); color:#084298; }
-    .guide-box strong { color:#005fa3; }
-    
-    .status-bar { background:linear-gradient(135deg,#e8f4fd,#d4edda); padding:5px 8px; border-radius:6px; margin:4px 0; border-left:4px solid #0078D7; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; }
-    .status-bar .label { font-weight:bold; color:#005fa3; font-size:clamp(11px,1.2vw,13px); }
-    .status-bar .value { font-weight:bold; color:#28a745; font-size:clamp(12px,1.3vw,14px); }
-    .status-bar .pending { color:#dc3545; }
-    
-    .config-card { background:linear-gradient(135deg,#e8f4fd,#fff); border:2px solid #0078D7; border-radius:8px; padding:8px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:4px; }
-    .config-card .badge { background:linear-gradient(135deg,#0078D7,#005fa3); color:#fff; padding:3px 8px; border-radius:12px; font-size:clamp(11px,1.2vw,13px); font-weight:bold; }
-    
-    .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); backdrop-filter:blur(3px); }
-    .modal-content { background:white; margin:3% auto; padding:14px; border-radius:12px; max-width:480px; width:94%; max-height:85vh; overflow-y:auto; }
-    .modal-content label { display:block; margin:6px 0 2px; font-weight:bold; font-size:clamp(12px,1.3vw,13px); }
-    .modal-content input, .modal-content select { width:100%; padding:6px 8px; border:2px solid #dee2e6; border-radius:6px; font-size:clamp(12px,1.3vw,13px); margin-bottom:3px; }
-    .close { float:right; font-size:24px; font-weight:bold; cursor:pointer; color:#adb5bd; }
-    
-    .alert-modal { text-align:center; padding:16px; max-width:350px; border-radius:14px; }
-    .alert-icon { font-size:40px; margin-bottom:8px; display:block; }
-    .alert-title { font-size:clamp(16px,2vw,18px); font-weight:bold; margin-bottom:4px; }
-    .alert-message { font-size:clamp(12px,1.3vw,14px); color:#4a5568; margin-bottom:10px; }
-    
-    .history-table { width:100%; border-collapse:collapse; margin-top:4px; border-radius:6px; overflow:hidden; font-size:clamp(10px,1.1vw,12px); }
-    .history-table th { background:linear-gradient(135deg,#0078D7,#005fa3); color:white; padding:4px 4px; text-align:center; }
-    .history-table td { padding:4px 4px; text-align:center; border-bottom:1px solid #dee2e6; }
-    
-    .status-badge { padding:2px 5px; border-radius:4px; font-weight:bold; font-size:clamp(9px,1vw,10px); display:inline-block; }
-    .status-pending { background:#ffeeba; color:#856404; }
-    .status-win { background:#d4edda; color:#155724; animation:winGlow 1s infinite alternate; }
-    .status-loss { background:#f8d7da; color:#721c24; }
-    @keyframes winGlow { 0%{box-shadow:0 0 5px rgba(40,167,69,0.4)} 100%{box-shadow:0 0 15px rgba(40,167,69,0.8)} }
-    
-    .bank-sub-group { display:flex; flex-direction:column; gap:4px; margin:6px 0 8px; background:#f8f9fa; padding:6px; border-radius:6px; }
-    .btn-bank { width:100%; padding:6px; border-radius:6px; font-weight:bold; text-align:center; display:block; color:white; font-size:clamp(12px,1.3vw,13px); text-decoration:none; }
-    .btn-bank:hover { transform:translateY(-1px); filter:brightness(1.05); }
-    .btn-aba { background:linear-gradient(135deg,#005fa3,#0078D7); }
-    .btn-acleda { background:linear-gradient(135deg,#0b6234,#13874b); }
-    
-    .instruction-box { background:#e8f4fd; border:1px solid #b3d7ff; padding:8px; border-radius:6px; margin-top:8px; }
-    .instruction-box ol { padding-left:14px; color:#2b4c6f; font-size:clamp(11px,1.2vw,12.5px); }
-    
-    .footer { background:#1a2634; color:#adb5bd; text-align:center; padding:8px; margin-top:10px; border-top:3px solid #0078D7; font-size:clamp(11px,1.2vw,13px); }
-    .action-group { display:flex; gap:4px; flex-wrap:wrap; margin-top:4px; }
-    .withdraw-notice { background:#fff5f5; border:1px dashed #ff8b8b; padding:6px; border-radius:6px; margin-bottom:8px; font-size:clamp(11px,1.2vw,12px); }
-    .warning-text { color:#dc3545; font-size:clamp(11px,1.2vw,12px); font-weight:bold; display:block; margin-top:3px; }
-    .new-win-badge { background:#ffc107; color:#000; padding:1px 5px; border-radius:8px; font-size:clamp(8px,0.9vw,9px); margin-left:3px; animation:blink 1s linear infinite; }
-    
-    .data-sync-bar { background:#e8f4fd; padding:6px 10px; border-radius:6px; margin:4px 0; border:1px solid #0078D7; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; font-size:clamp(11px,1.2vw,12px); }
-    .data-sync-bar .sync-status { color:#28a745; font-weight:bold; }
-    .data-sync-bar .sync-pending { color:#ff9800; font-weight:bold; animation:blink 1s linear infinite; }
-    
-    @media(max-width:768px){
-      .numbers div { flex:1 1 calc(33.33% - 5px); min-width:42px; padding:6px 3px; font-size:12px; }
-      .clock-box { flex-direction:column; text-align:center; gap:4px; }
-      .input-row { flex-direction:column; align-items:stretch; }
-      .type-selector, .time-selector { flex-direction:column; }
-      .type-btn, .time-btn { min-width:100%; }
-      .letter-circle { width:34px; height:34px; font-size:13px; }
+    /* ===== CSS ដូចគ្នានឹងឯកសារដើម ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kantumruy Pro', sans-serif; }
+    body { background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 50%, #1E40AF 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .payment-container { max-width: 540px; width: 100%; background: #FFFFFF; border-radius: 24px; padding: 36px 30px; box-shadow: 0 30px 80px rgba(0,0,0,0.35); animation: fadeIn 0.6s ease; position: relative; overflow: hidden; }
+    .payment-container::before { content: ''; position: absolute; top: -100px; right: -100px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(37,99,235,0.04) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+    .payment-container::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(37,99,235,0.03) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .payment-header { text-align: center; margin-bottom: 28px; position: relative; z-index: 1; }
+    .payment-header .icon { background: linear-gradient(135deg, #2563EB, #1D4ED8); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 36px; color: white; box-shadow: 0 8px 35px rgba(37,99,235,0.4); animation: pulse 3s ease-in-out infinite; position: relative; }
+    .payment-header .icon::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid rgba(37,99,235,0.15); animation: pulse 3s ease-in-out infinite 0.5s; }
+    .payment-header h1 { font-size: 26px; color: #0F172A; font-weight: 700; background: linear-gradient(135deg, #0F172A, #2563EB); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .payment-header p { color: #64748B; font-size: 14px; margin-top: 4px; }
+
+    .fee-selection { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; position: relative; z-index: 1; }
+    .fee-option { border: 2px solid #E8EDF5; border-radius: 14px; padding: 18px 14px; text-align: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); background: #FAFBFD; position: relative; }
+    .fee-option:hover { border-color: #94A3B8; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+    .fee-option.selected { border-color: #2563EB; background: #EEF4FF; box-shadow: 0 0 0 4px rgba(37,99,235,0.1), 0 8px 25px rgba(37,99,235,0.08); transform: translateY(-2px); }
+    .fee-option .fee-amount { font-size: 30px; font-weight: 700; color: #0F172A; }
+    .fee-option .fee-amount small { font-size: 14px; font-weight: 400; color: #94A3B8; }
+    .fee-option.selected .fee-amount { color: #1D4ED8; }
+    .fee-option .fee-label { font-size: 13px; color: #64748B; margin-top: 2px; font-weight: 500; }
+    .fee-option.selected .fee-label { color: #1D4ED8; }
+    .fee-option .fee-badge { position: absolute; top: -10px; right: -10px; background: linear-gradient(135deg, #2563EB, #1D4ED8); color: white; font-size: 10px; font-weight: 700; padding: 3px 12px; border-radius: 20px; box-shadow: 0 2px 10px rgba(37,99,235,0.25); }
+    .fee-option.selected .fee-badge { background: linear-gradient(135deg, #1D4ED8, #1E40AF); box-shadow: 0 2px 15px rgba(37,99,235,0.35); }
+    .fee-option input[type="radio"] { display: none; }
+
+    .fee-summary { background: linear-gradient(135deg, #F8FAFC, #EEF4FF); border-radius: 14px; padding: 16px 20px; margin-bottom: 24px; border-left: 4px solid #2563EB; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; position: relative; z-index: 1; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02); }
+    .fee-summary .label { color: #475569; font-size: 14px; font-weight: 500; }
+    .fee-summary .amount { font-size: 28px; font-weight: 700; color: #2563EB; }
+    .fee-summary .amount small { font-size: 14px; font-weight: 400; color: #94A3B8; }
+
+    .form-group { margin-bottom: 18px; position: relative; z-index: 1; }
+    .form-group label { display: block; font-weight: 600; font-size: 14px; color: #0F172A; margin-bottom: 6px; }
+    .form-group label .required { color: #EF4444; margin-left: 2px; }
+    .form-group input { width: 100%; padding: 13px 16px; border: 2px solid #E8EDF5; border-radius: 12px; font-size: 15px; outline: none; transition: all 0.3s ease; background: #FAFBFD; color: #0F172A; }
+    .form-group input:focus { border-color: #2563EB; box-shadow: 0 0 0 4px rgba(37,99,235,0.08); background: white; }
+    .form-group input.error { border-color: #EF4444; box-shadow: 0 0 0 4px rgba(239,68,68,0.08); background: #FEF2F2; }
+    .form-group input.valid { border-color: #22C55E; background: #F0FDF4; }
+    .form-group input::placeholder { color: #A0AEC0; }
+    .form-group .error-text { display: none; color: #EF4444; font-size: 12px; font-weight: 500; margin-top: 4px; padding-left: 4px; }
+    .form-group .error-text.show { display: block; animation: slideDown 0.3s ease; }
+    .form-group .valid-text { display: none; color: #22C55E; font-size: 12px; font-weight: 500; margin-top: 4px; padding-left: 4px; }
+    .form-group .valid-text.show { display: block; animation: slideDown 0.3s ease; }
+
+    .aba-khqr-btn { display: flex; align-items: center; justify-content: center; gap: 14px; width: 100%; padding: 18px 20px; background: linear-gradient(135deg, #003A73 0%, #0055A4 40%, #0077BE 100%); color: white; border: none; border-radius: 14px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); text-decoration: none; font-family: 'Kantumruy Pro', sans-serif; position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(0,85,164,0.3); }
+    .aba-khqr-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%); pointer-events: none; border-radius: 14px; }
+    .aba-khqr-btn::after { content: ''; position: absolute; top: -50%; right: -30%; width: 120px; height: 120px; background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+    .aba-khqr-btn:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 10px 40px rgba(0,85,164,0.45); }
+    .aba-khqr-btn:active { transform: scale(0.97); box-shadow: 0 4px 15px rgba(0,85,164,0.25); }
+    .aba-khqr-btn .khqr-icon { display: flex; align-items: center; justify-content: center; gap: 6px; background: rgba(255,255,255,0.12); padding: 8px 16px; border-radius: 10px; font-size: 14px; font-weight: 600; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1; flex-shrink: 0; }
+    .aba-khqr-btn .khqr-icon i { font-size: 22px; }
+    .aba-khqr-btn .khqr-icon .qr-symbol { display: inline-block; background: rgba(255,215,0,0.2); padding: 2px 10px; border-radius: 6px; font-size: 11px; letter-spacing: 1px; color: #FFD700; font-weight: 700; }
+    .aba-khqr-btn .khqr-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; position: relative; z-index: 1; }
+    .aba-khqr-btn .khqr-text .main { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+    .aba-khqr-btn .khqr-text .sub { font-size: 12px; font-weight: 400; opacity: 0.8; }
+    .aba-khqr-btn .khqr-arrow { position: relative; z-index: 1; font-size: 16px; opacity: 0.6; transition: all 0.3s ease; margin-left: auto; padding-left: 8px; }
+    .aba-khqr-btn:hover .khqr-arrow { transform: translateX(6px); opacity: 1; }
+    .aba-khqr-btn .khqr-float { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.03); pointer-events: none; }
+    .aba-khqr-btn .khqr-float.f1 { width: 100px; height: 100px; top: -40px; right: -20px; background: radial-gradient(circle, rgba(255,215,0,0.04) 0%, transparent 70%); }
+    .aba-khqr-btn .khqr-float.f2 { width: 60px; height: 60px; bottom: -20px; left: 10px; background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%); }
+
+    .file-upload { position: relative; border: 2px dashed #D1D9E6; border-radius: 14px; padding: 32px 20px; text-align: center; cursor: pointer; transition: all 0.3s ease; background: #FAFBFD; }
+    .file-upload:hover { border-color: #2563EB; background: #F1F7FF; }
+    .file-upload.has-file { border-color: #22C55E; background: #F0FDF4; }
+    .file-upload.error { border-color: #EF4444; background: #FEF2F2; }
+    .file-upload i { font-size: 40px; color: #A0AEC0; display: block; margin-bottom: 6px; transition: color 0.3s ease; }
+    .file-upload.has-file i { color: #22C55E; }
+    .file-upload p { color: #64748B; font-size: 14px; }
+    .file-upload .file-name { font-weight: 600; color: #0F172A; margin-top: 4px; font-size: 14px; word-break: break-all; }
+    .file-upload input[type="file"] { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+    .file-preview { margin-top: 12px; max-width: 100%; border-radius: 10px; border: 1px solid #E8EDF5; display: none; max-height: 200px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
+    .file-preview img { width: 100%; height: auto; display: block; }
+
+    .submit-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #2563EB, #1D4ED8); color: white; border: none; border-radius: 14px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); font-family: 'Kantumruy Pro', sans-serif; display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 8px; box-shadow: 0 4px 20px rgba(37,99,235,0.3); position: relative; z-index: 1; overflow: hidden; }
+    .submit-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); background-size: 200% 100%; animation: shimmer 3s ease-in-out infinite; pointer-events: none; }
+    .submit-btn:hover:not(:disabled):not(.disabled) { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(37,99,235,0.4); }
+    .submit-btn:active:not(:disabled):not(.disabled) { transform: scale(0.97); }
+    .submit-btn:disabled, .submit-btn.disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none; background: linear-gradient(135deg, #94A3B8, #64748B); }
+    .submit-btn.disabled .btn-text i { opacity: 0.7; }
+    .submit-btn .spinner { display: none; animation: spin 0.8s linear infinite; }
+    .submit-btn.loading .spinner { display: inline-block; }
+    .submit-btn.loading .btn-text { display: none; }
+    .submit-btn .btn-text { display: flex; align-items: center; gap: 10px; }
+
+    .submit-status { display: none; text-align: center; font-size: 13px; font-weight: 500; margin-top: 10px; padding: 10px 14px; border-radius: 10px; background: #F1F5F9; color: #64748B; animation: slideDown 0.4s ease; position: relative; z-index: 1; }
+    .submit-status.show { display: block; }
+    .submit-status.ready { background: #EEF4FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+    .submit-status.ready i { color: #2563EB; }
+    .submit-status.incomplete { background: #FEF2F2; color: #991B1B; border: 1px solid #FECACA; }
+    .submit-status.incomplete i { color: #EF4444; }
+
+    .success-message { display: none; background: linear-gradient(135deg, #F0FDF4, #DCFCE7); border: 2px solid #86EFAC; color: #166534; padding: 20px; border-radius: 14px; margin-top: 20px; text-align: center; font-weight: 600; font-size: 15px; animation: fadeIn 0.5s ease; position: relative; z-index: 1; }
+    .success-message i { font-size: 36px; display: block; margin-bottom: 8px; color: #22C55E; }
+
+    .alert { display: none; padding: 14px 18px; border-radius: 12px; margin-bottom: 16px; font-weight: 500; font-size: 14px; animation: slideDown 0.4s ease; position: relative; z-index: 1; }
+    .alert.error { display: block; background: #FEF2F2; border-left: 4px solid #EF4444; color: #991B1B; }
+    .alert.success { display: block; background: #F0FDF4; border-left: 4px solid #22C55E; color: #166534; }
+    .alert .alert-icon { margin-right: 10px; }
+
+    .back-link { display: block; text-align: center; margin-top: 18px; color: #94A3B8; text-decoration: none; font-size: 13px; transition: all 0.3s ease; position: relative; z-index: 1; }
+    .back-link:hover { color: #2563EB; }
+    .back-link i { margin-right: 6px; }
+
+    .payment-note { background: #FFFBEB; border-radius: 12px; padding: 14px 18px; margin-top: 16px; border-left: 4px solid #F59E0B; font-size: 13px; color: #92400E; display: flex; align-items: flex-start; gap: 12px; position: relative; z-index: 1; }
+    .payment-note i { color: #F59E0B; font-size: 18px; margin-top: 1px; flex-shrink: 0; }
+    .fee-description { font-size: 12px; color: #64748B; margin-top: 4px; padding-left: 4px; }
+
+    @media (max-width: 480px) {
+      .payment-container { padding: 24px 18px; border-radius: 18px; }
+      .payment-header h1 { font-size: 20px; }
+      .payment-header .icon { width: 64px; height: 64px; font-size: 28px; }
+      .fee-selection { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .fee-option .fee-amount { font-size: 24px; }
+      .fee-summary .amount { font-size: 22px; }
+      .aba-khqr-btn { flex-wrap: wrap; padding: 14px 16px; gap: 10px; border-radius: 12px; }
+      .aba-khqr-btn .khqr-text .main { font-size: 17px; }
+      .aba-khqr-btn .khqr-icon { padding: 6px 12px; font-size: 12px; }
+      .aba-khqr-btn .khqr-icon i { font-size: 18px; }
+      .aba-khqr-btn .khqr-arrow { display: none; }
+      .submit-btn { font-size: 16px; padding: 15px; }
+      .file-upload { padding: 24px 16px; }
+      .file-upload i { font-size: 32px; }
+      .submit-status { font-size: 12px; padding: 8px 12px; }
     }
-    @media(max-width:480px){
-      .numbers div { flex:1 1 calc(50% - 4px); min-width:32px; padding:4px 2px; font-size:11px; }
-      .countdown .time-display { font-size:26px; padding:3px 10px; min-width:90px; }
-    }
+    @media (max-width: 380px) { .fee-selection { grid-template-columns: 1fr; } .payment-container { padding: 20px 14px; } .aba-khqr-btn .khqr-text .main { font-size: 15px; } }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🎰 ឆ្នោតខ្មែរ N98</h1>
-    <p>ប្រព័ន្ធទិញលេខឆ្នោត និងទទួលបានរង្វាន់</p>
-  </header>
 
-  <nav class="nav-bar">
-    <a href="#" class="active" onclick="showSection('home', event)">🏠 ដើម</a>
-    <a href="#" onclick="showSection('history', event)">📊 ប្រវត្តិ</a>
-    <a href="#" onclick="showSection('rules', event)">📋 ច្បាប់</a>
-    <button class="btn-share" onclick="copyLink()">🔗 ចែករំលែក</button>
-    <button class="btn-group" onclick="openGroup()">📢 ក្រុម</button>
-  </nav>
-
-  <div class="section">
-
-    <div class="clock-box">
-      <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-        <span style="font-size:clamp(20px,3vw,24px);">⏰</span>
-        <div>
-          <div class="clock-title">🕒 ម៉ោងបច្ចុប្បន្ន</div>
-          <div class="clock-time" id="widgetTime">00:00:00</div>
-        </div>
-      </div>
-      <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-        <div><div class="clock-date" id="widgetDate">ថ្ងៃទី...</div></div>
-        <span style="font-size:clamp(20px,3vw,24px);">📆</span>
-      </div>
+  <div class="payment-container">
+    
+    <div class="payment-header">
+      <div class="icon"><i class="fas fa-hand-holding-usd"></i></div>
+      <h1>ទូទាត់ថ្លៃសេវាកម្ម</h1>
+      <p>ភ្នាក់ងារជ្រើសរើសបុគ្គលិកទូទៅ</p>
     </div>
 
-    <div class="data-sync-bar" id="syncBar">
-      <span>📡 ស្ថានភាពទិន្នន័យ៖</span>
-      <span class="sync-status" id="syncStatus">✅ រួចរាល់</span>
+    <div class="fee-selection" id="feeSelection">
+      <label class="fee-option selected" id="feeOption1">
+        <input type="radio" name="feeType" value="2" checked>
+        <div class="fee-amount">2$ <small>USD</small></div>
+        <div class="fee-label">📄 ថ្លៃសេវាផ្ញើព័ត៌មាន</div>
+        <div class="fee-badge">ផ្ញើព័ត៌មាន</div>
+      </label>
+      <label class="fee-option" id="feeOption4">
+        <input type="radio" name="feeType" value="4">
+        <div class="fee-amount">4$ <small>USD</small></div>
+        <div class="fee-label">✅ ថ្លៃសេវាជោគជ័យ</div>
+        <div class="fee-badge">ជាប់ការងារ</div>
+      </label>
     </div>
 
-    <div class="status-bar">
-      <span class="label">📊 ស្ថានភាព៖</span>
-      <span class="value" id="resultStatusText">កំពុងផ្ទុក...</span>
+    <div class="fee-summary">
+      <span class="label">💳 ថ្លៃសេវាដែលបានជ្រើសរើស</span>
+      <span class="amount" id="selectedAmount">2$ <small>USD</small></span>
     </div>
 
-    <div class="countdown">
-      <div style="display:flex; justify-content:center; align-items:center; gap:6px; flex-wrap:wrap;">
-        <span style="font-size:clamp(20px,3vw,24px);">🎲</span>
-        <span style="font-size:clamp(14px,1.8vw,16px); color:#dc3545; font-weight:bold;">⏳ រាប់ថយក្រោយ</span>
-      </div>
-      <div class="time-display" id="countdownDisplay">--:--:--</div>
-      <div class="next-time" id="nextTimeLabel">🎯 ពេលបន្ទាប់...</div>
-      <div class="status-time" id="statusTimeLabel"></div>
-    </div>
+    <div id="alert" class="alert"></div>
 
-    <div id="homeSection">
-
-      <div class="lottery-box">
-        <div class="time-box">
-          🕛 លទ្ធផល 12:00 
-          <span class="badge" id="badge12">ព្រឹកពីរ</span>
-        </div>
-        <div style="font-weight:bold;color:#0078D7;font-size:12px;margin-top:6px;">🔢 ២ខ្ទង់</div>
-        <div class="numbers" id="box12">
-          <div><span class="letter">A:</span> <span id="r12_A">--</span></div>
-          <div><span class="letter">B:</span> <span id="r12_B">--</span></div>
-          <div><span class="letter">C:</span> <span id="r12_C">--</span></div>
-          <div><span class="letter">D:</span> <span id="r12_D">--</span></div>
-          <div><span class="letter">E:</span> <span id="r12_E">--</span></div>
-        </div>
-        <div style="font-weight:bold;color:#6f42c1;font-size:12px;margin-top:8px;">🔢 ៣ខ្ទង់</div>
-        <div class="numbers" id="box12_3d">
-          <div><span class="letter">A:</span> <span id="r12_3d_A">--</span></div>
-          <div><span class="letter">B:</span> <span id="r12_3d_B">--</span></div>
-          <div><span class="letter">C:</span> <span id="r12_3d_C">--</span></div>
-          <div><span class="letter">D:</span> <span id="r12_3d_D">--</span></div>
-          <div><span class="letter">E:</span> <span id="r12_3d_E">--</span></div>
-        </div>
+    <form id="paymentForm" enctype="multipart/form-data" novalidate>
+      
+      <div class="form-group">
+        <label>លេខទូរស័ព្ទ <span class="required">*</span></label>
+        <input type="tel" id="phone" placeholder="បំពេញលេខទូរស័ព្ទរបស់អ្នក (ឧ: 012345678)" required>
+        <span class="error-text" id="phoneError">សូមបំពេញលេខទូរស័ព្ទឲ្យបានត្រឹមត្រូវ (ឧ: 012345678)</span>
+        <span class="valid-text" id="phoneValid">✅ លេខទូរស័ព្ទត្រឹមត្រូវ</span>
       </div>
 
-      <div class="lottery-box">
-        <div class="time-box">
-          🕓 លទ្ធផល 16:00 
-          <span class="badge" id="badge16">ល្ងាចបី</span>
-        </div>
-        <div style="font-weight:bold;color:#0078D7;font-size:12px;margin-top:6px;">🔢 ២ខ្ទង់</div>
-        <div class="numbers" id="box16">
-          <div><span class="letter">A:</span> <span id="r16_A">--</span></div>
-          <div><span class="letter">B:</span> <span id="r16_B">--</span></div>
-          <div><span class="letter">C:</span> <span id="r16_C">--</span></div>
-          <div><span class="letter">D:</span> <span id="r16_D">--</span></div>
-          <div><span class="letter">E:</span> <span id="r16_E">--</span></div>
-        </div>
-        <div style="font-weight:bold;color:#6f42c1;font-size:12px;margin-top:8px;">🔢 ៣ខ្ទង់</div>
-        <div class="numbers" id="box16_3d">
-          <div><span class="letter">A:</span> <span id="r16_3d_A">--</span></div>
-          <div><span class="letter">B:</span> <span id="r16_3d_B">--</span></div>
-          <div><span class="letter">C:</span> <span id="r16_3d_C">--</span></div>
-          <div><span class="letter">D:</span> <span id="r16_3d_D">--</span></div>
-          <div><span class="letter">E:</span> <span id="r16_3d_E">--</span></div>
+      <div class="form-group">
+        <label>តេឡេក្រាម (Link / Username) <span class="required">*</span></label>
+        <input type="text" id="telegram" placeholder="ឧ: https://t.me/username ឬ @username" required>
+        <span class="error-text" id="telegramError">សូមបំពេញតេឡេក្រាមឲ្យបានត្រឹមត្រូវ (ឧ: @username ឬ https://t.me/username)</span>
+        <span class="valid-text" id="telegramValid">✅ តេឡេក្រាមត្រឹមត្រូវ</span>
+        <div class="fee-description">📌 ភ្នាក់ងារនឹងប្រើតេឡេក្រាមដើម្បីជូនដំណឹងលទ្ធផលដាក់ពាក្យរបស់អ្នក</div>
+      </div>
+
+      <div class="form-group">
+        <label>ឈ្មោះគណនីធនាគារ <span class="required">*</span></label>
+        <input type="text" id="accountName" placeholder="បំពេញឈ្មោះគណនីធនាគាររបស់អ្នក" required>
+        <span class="error-text" id="accountNameError">សូមបំពេញឈ្មោះគណនីធនាគារ (យ៉ាងតិច ២ តួអក្សរ)</span>
+        <span class="valid-text" id="accountNameValid">✅ ឈ្មោះគណនីត្រឹមត្រូវ</span>
+      </div>
+
+      <div class="form-group">
+        <label>លេខគណនីធនាគារ <span class="required">*</span></label>
+        <input type="text" id="accountNumber" placeholder="បំពេញលេខគណនីធនាគាររបស់អ្នក" required>
+        <span class="error-text" id="accountNumberError">សូមបំពេញលេខគណនីធនាគារ (យ៉ាងតិច ៤ ខ្ទង់)</span>
+        <span class="valid-text" id="accountNumberValid">✅ លេខគណនីត្រឹមត្រូវ</span>
+      </div>
+
+      <div class="form-group">
+        <label>ជំហានទី ១: បង់ប្រាក់តាម KHQR (ABA Bank)</label>
+        <a href="https://pay.ababank.com/oRF8/e6wai8xh" target="_blank" class="aba-khqr-btn" id="abaPayBtn">
+          <span class="khqr-float f1"></span>
+          <span class="khqr-float f2"></span>
+          <span class="khqr-icon">
+            <i class="fas fa-qrcode"></i>
+            <span class="qr-symbol">KHQR</span>
+          </span>
+          <span class="khqr-text">
+            <span class="main">🏦 ABA Bank</span>
+            <span class="sub">បង់ប្រាក់តាម KHQR ស្តង់ដារ</span>
+          </span>
+          <span class="khqr-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+        </a>
+        <div class="fee-description" style="margin-top:6px;">
+          🔒 ចុចដើម្បីបង់ប្រាក់តាមប្រព័ន្ធ KHQR ស្តង់ដារ (សុវត្ថិភាព 100%)
         </div>
       </div>
 
-      <div class="bet-box">
-        <h2>🎯 ទិញលេខឆ្នោត (A, B, C, D, E)</h2>
-
-        <div class="guide-box">
-          💡 <strong>របៀបប្រើ៖</strong><br>
-          ១. ជ្រើសរើស <strong>ពេលវេលា</strong> និង <strong>ប្រភេទលេខ</strong><br>
-          ២. ចុចអក្សរ <strong>A, B, C, D, E</strong><br>
-          ៣. បញ្ចូលលេខ (ឧ. 01,02,03) ចុចបន្ថែម<br>
-          ៤. ជ្រើសរើសចំនួនទឹកប្រាក់ រួចចុច "ដាក់ប្រាក់"
+      <div class="form-group">
+        <label>ជំហានទី ២: ភ្ជាប់រូបភាពថតអេក្រង់បន្ទាប់ពីបង់ប្រាក់ <span class="required">*</span></label>
+        <div class="file-upload" id="fileUpload">
+          <i class="fas fa-camera"></i>
+          <p>ចុចដើម្បីភ្ជាប់រូបភាព (Screenshot)</p>
+          <div class="file-name" id="fileName"></div>
+          <input type="file" id="screenshot" accept="image/*" required>
         </div>
-
-        <table class="reward-table">
-          <thead><tr><th>ប្រភេទ</th><th>ម៉ោង</th><th>អត្រា</th></tr></thead>
-          <tbody>
-            <tr><td>២ខ្ទង់ (A-E)</td><td>12:00 & 16:00</td><td>1$ → <span class="text-respond">70$</span></td></tr>
-            <tr><td>៣ខ្ទង់ (A-E)</td><td>12:00 & 16:00</td><td>1$ → <span class="text-respond">500$</span></td></tr>
-          </tbody>
-        </table>
-
-        <div style="background:#fff5f5; border:1px solid #ffb3b3; padding:4px; border-radius:6px; margin-bottom:8px; text-align:center;">
-          <span style="color:#d63000; font-weight:bold; font-size:clamp(11px,1.2vw,13px);">⚠️ ចាក់ពី 500៛/0.25$ ដល់ 40,000៛/10$ អតិបរមា 10 លេខ</span>
-        </div>
-
-        <div style="font-weight:bold; color:#0078D7; font-size:clamp(12px,1.3vw,14px); margin-bottom:6px;">
-          ជ្រើសរើស ពេលវេលា ប្រភេទ និង A,B,C,D,E
-        </div>
-
-        <div class="time-selector">
-          <button class="time-btn active" onclick="setTime('12:00', event)">🕛 12:00</button>
-          <button class="time-btn" onclick="setTime('16:00', event)">🕓 16:00</button>
-        </div>
-
-        <div class="type-selector">
-          <button class="type-btn active" onclick="setType('two', event)">🔢 ២ខ្ទង់</button>
-          <button class="type-btn" onclick="setType('three', event)">🔢 ៣ខ្ទង់</button>
-        </div>
-
-        <div class="config-card">
-          <span>📌 បច្ចុប្បន្ន៖</span>
-          <span class="badge" id="configBadge">12:00 | ២ខ្ទង់</span>
-        </div>
-
-        <div style="font-weight:bold; color:#0078D7; font-size:clamp(12px,1.3vw,14px); text-align:center; margin-bottom:6px;">
-          ចុចជ្រើសរើស A,B,C,D,E
-        </div>
-        <div class="letter-selector">
-          <div class="letter-circle" onclick="selectLetter('A', event)">A</div>
-          <div class="letter-circle" onclick="selectLetter('B', event)">B</div>
-          <div class="letter-circle" onclick="selectLetter('C', event)">C</div>
-          <div class="letter-circle" onclick="selectLetter('D', event)">D</div>
-          <div class="letter-circle" onclick="selectLetter('E', event)">E</div>
-        </div>
-
-        <div class="input-row">
-          <input type="text" id="numInput" placeholder="បញ្ចូលលេខ (ឧ. 01,02,03)" disabled>
-          <button class="btn btn-primary" id="btnAdd" onclick="addNumber()" disabled>➕ បន្ថែម</button>
-        </div>
-
-        <div class="selected-display" id="selectedDisplay">
-          <span style="color:#6c757d; font-size:clamp(11px,1.2vw,12px);">មិនទាន់មានលេខ</span>
-        </div>
-
-        <div style="display:flex; gap:4px; align-items:center; margin-bottom:6px; flex-wrap:wrap;">
-          <span style="font-size:clamp(11px,1.2vw,12px); color:#6c757d;">ចំនួន៖ <strong id="countDisplay" style="color:#0078D7; font-size:clamp(13px,1.4vw,15px);">0</strong> / 10</span>
-        </div>
-
-        <div>
-          <label style="font-weight:bold; color:#0078D7; font-size:clamp(11px,1.2vw,13px);">💰 ចំនួនក្នុងមួយលេខ</label>
-          <div class="amount-buttons">
-            <button class="btn btn-amount" onclick="setAmount(500,'៛')">500៛</button>
-            <button class="btn btn-amount" onclick="setAmount(1000,'៛')">1000៛</button>
-            <button class="btn btn-amount" onclick="setAmount(5000,'៛')">5000៛</button>
-            <button class="btn btn-amount" onclick="setAmount(10000,'៛')">10000៛</button>
-            <button class="btn btn-amount" onclick="setAmount(0.25,'$')">0.25$</button>
-            <button class="btn btn-amount" onclick="setAmount(1,'$')">1$</button>
-            <button class="btn btn-amount" onclick="setAmount(5,'$')">5$</button>
-            <button class="btn btn-amount" onclick="setAmount(10,'$')">10$</button>
-          </div>
-          <div class="custom-amount">
-            <input type="number" id="amountInput" placeholder="✍️ បញ្ចូលដោយខ្លួន" min="0.01" step="any" oninput="updateAmount()">
-            <select id="currencySelect" onchange="updateAmount()">
-              <option value="USD">ដុល្លារ ($)</option>
-              <option value="KHR">រៀល (៛)</option>
-            </select>
-          </div>
-          <span class="warning-text" id="limitWarning" style="display:none;">⚠️ ត្រូវចាប់ពី 500៛/0.25$ ដល់ 40,000៛/10$</span>
-        </div>
-
-        <div class="bet-summary">
-          <div class="bet-summary-item"><span>📊 ចំនួនលេខសរុប៖</span><span id="totalCount">0</span></div>
-          <div class="bet-summary-item total"><span>💵 សរុប៖</span><span id="totalAmountDisplay">0</span></div>
-        </div>
-
-        <button class="btn btn-success" id="btnSubmit" onclick="submitBet()" style="width:100%; padding:8px; font-size:clamp(13px,1.4vw,15px);" disabled>
-          💳 ដាក់ប្រាក់តាម ABA / ACLEDA
-        </button>
-      </div>
-
-      <div class="lottery-box">
-        <div class="time-box" style="color:#6f42c1;">🕒 ប្រវត្តិចាក់របស់អ្នក</div>
-        <div style="overflow-x:auto; margin-top:4px;">
-          <table class="history-table">
-            <thead><tr style="background:linear-gradient(135deg,#6f42c1,#5a32a3);">
-              <th>កាលបរិច្ឆេទ</th><th>📱 លេខទូរស័ព្ទ</th><th>លេខចាក់</th><th>ប្រភេទ</th><th>ចំនួន</th><th>ស្ថានភាព</th><th>រង្វាន់</th>
-            </tr></thead>
-            <tbody id="userHistoryBody">
-              <tr><td colspan="7" style="color:#6c757d; padding:8px;">មិនទាន់មានប្រវត្តិ</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div style="font-size:clamp(10px,1.1vw,11px); color:#dc3545; font-weight:600; margin-top:8px; padding:4px; background:#fff5f5; border:1px dashed #ffb3b3; border-radius:4px;">
-          ⚠️ ទិន្នន័យរក្សាទុកក្នុងឧបករណ៍របស់អ្នក
+        <span class="error-text" id="fileError">សូមភ្ជាប់រូបភាពថតអេក្រង់បន្ទាប់ពីបង់ប្រាក់</span>
+        <span class="valid-text" id="fileValid">✅ រូបភាពត្រូវបានភ្ជាប់</span>
+        <div class="file-preview" id="filePreview">
+          <img id="previewImage" src="" alt="Screenshot Preview">
         </div>
       </div>
 
-      <div class="lottery-box">
-        <div class="time-box">🏦 ដកប្រាក់</div>
-        <p style="font-size:clamp(11px,1.2vw,13px); color:#4a5568; margin:3px 0;">ដកបានបន្ទាប់ពី 12:00 និង 16:00</p>
-        <div class="action-group">
-          <button class="btn btn-withdraw" onclick="openWithdraw('normal')">🏦 ដកប្រាក់រង្វាន់</button>
-          <button class="btn btn-withdraw" onclick="openWithdraw('late')">🏦 ដកប្រាក់រង្វាន់ / ⏰ ដកយឺត</button>
-          <button class="btn btn-telegram" onclick="contactAdmin()">✈️ ទាក់ទង</button>
-        </div>
+      <button type="submit" class="submit-btn disabled" id="submitBtn" disabled>
+        <span class="btn-text"><i class="fas fa-paper-plane"></i> ផ្ញើព័ត៌មានទូទាត់</span>
+        <span class="spinner"><i class="fas fa-spinner"></i></span>
+      </button>
+
+      <div class="submit-status incomplete" id="submitStatus">
+        <i class="fas fa-exclamation-circle"></i> សូមបំពេញព័ត៌មានឲ្យបានពេញលេញ និងត្រឹមត្រូវមុនពេលផ្ញើ
       </div>
+
+    </form>
+
+    <div class="success-message" id="successMessage">
+      <i class="fas fa-check-circle"></i>
+      ✅ ព័ត៌មានទូទាត់របស់អ្នកត្រូវបានផ្ញើដោយជោគជ័យ!
+      <br><small style="font-weight:400; display:block; margin-top:6px;">ភ្នាក់ងារនឹងទាក់ទងអ្នកតាមរយៈតេឡេក្រាមក្នុងពេលឆាប់ៗ</small>
     </div>
 
-    <div id="historySection" style="display:none;">
-      <div class="lottery-box">
-        <div class="time-box">📊 ប្រវត្តិលទ្ធផល</div>
-        <div style="overflow-x:auto; margin-top:4px;">
-          <table class="history-table">
-            <thead><tr style="background:linear-gradient(135deg,#0078D7,#005fa3);">
-              <th>កាលបរិច្ឆេទ</th><th>ម៉ោង</th><th>២ខ្ទង់</th><th>៣ខ្ទង់</th>
-            </tr></thead>
-            <tbody id="historyBody">
-              <tr><td colspan="4" style="color:#6c757d; padding:8px;">កំពុងផ្ទុក...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div class="payment-note">
+      <i class="fas fa-info-circle"></i>
+      <span>
+        <strong>សូមបញ្ជាក់៖</strong><br>
+        • <strong>2$</strong> សម្រាប់ការបញ្ជូនព័ត៌មានដាក់ពាក្យរបស់អ្នកទៅកាន់ក្រុមហ៊ុន<br>
+        • <strong>4$</strong> សម្រាប់កម្រៃជោគជ័យ (នៅពេលជាប់ការងារ)<br>
+        បន្ទាប់ពីបង់ប្រាក់រួច សូមភ្ជាប់រូបភាពថតអេក្រង់ដើម្បីផ្ទៀងផ្ទាត់។
+      </span>
     </div>
 
-    <div id="rulesSection" style="display:none;">
-      <div class="bet-box">
-        <h2>📋 ច្បាប់ និងរបៀបប្រើប្រាស់</h2>
-        <div style="padding:8px; font-size:clamp(12px,1.3vw,13px); line-height:1.6;">
-          <h4 style="color:#005fa3;">១. របៀបចាក់</h4>
-          <p>១. ជ្រើសរើសពេលវេលា (12:00 ឬ 16:00)</p>
-          <p>២. ជ្រើសរើសប្រភេទ (២ ឬ ៣ ខ្ទង់)</p>
-          <p>៣. ចុចជ្រើសរើស A, B, C, D, E</p>
-          <p>៤. បញ្ចូលលេខ ចុច "បន្ថែម"</p>
-          <p>៥. ជ្រើសរើសចំនួនទឹកប្រាក់</p>
-          <p>៦. ចុច "ដាក់ប្រាក់តាម ABA / ACLEDA"</p>
-
-          <h4 style="color:#005fa3; margin-top:10px;">២. អត្រារង្វាន់</h4>
-          <p>• 12:00 & 16:00 - ២ខ្ទង់ (A-E) ៖ 1$ → 70$</p>
-          <p>• 12:00 & 16:00 - ៣ខ្ទង់ (A-E) ៖ 1$ → 500$</p>
-          <p>• ចាក់ពី 500៛/0.25$ ដល់ 40,000៛/10$</p>
-
-          <h4 style="color:#005fa3; margin-top:10px;">៣. របៀបដកប្រាក់</h4>
-          <p>• ដកបានបន្ទាប់ពី 12:00 និង 16:00</p>
-          <p>• សុពលភាព៖ ២៤ ម៉ោង បន្ទាប់ពីប្រកាសលទ្ធផល</p>
-          <p>• បន្ទាប់ពីផុតកំណត់ លេខនឹងត្រូវបានលុបចោល</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="footer">
-    © 2026 Khmer Lottery N98 | ប្រព័ន្ធទិញលេខឆ្នោត
-  </div>
-
-  <div class="modal" id="depositModal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('depositModal')">&times;</span>
-      <h2 style="color:#0078D7; font-size:clamp(18px,2.2vw,22px);">💳 បញ្ជាក់ការទូទាត់</h2>
-      <form id="depositForm">
-        <div class="bet-summary">
-          <div class="bet-summary-item"><span>🔢 លេខ៖</span><span id="confirmNumbers">-</span></div>
-          <div class="bet-summary-item total"><span>💵 សរុប៖</span><span id="confirmTotal">-</span></div>
-        </div>
-        <label>លេខទូរស័ព្ទ *</label>
-        <input type="tel" id="depPhone" required placeholder="បញ្ចូលលេខទូរស័ព្ទ">
-        <label>ធនាគារ *</label>
-        <select id="depBank" required>
-          <option value="">-- ជ្រើសរើស --</option>
-          <option value="ABA Bank">ABA Bank</option>
-          <option value="ACLEDA Bank">ACLEDA Bank</option>
-          <option value="Wing Bank">Wing Bank</option>
-          <option value="TrueMoney">TrueMoney</option>
-          <option value="Canadia Bank">Canadia Bank</option>
-        </select>
-        <label>ឈ្មោះគណនី *</label>
-        <input type="text" id="depAccName" required placeholder="បញ្ចូលឈ្មោះគណនី">
-        <div class="bank-sub-group">
-          <a href="https://pay.ababank.com/oRF8/yi1odxjr" target="_blank" class="btn-bank btn-aba">🏦 ABA Bank</a>
-          <a href="https://acledabank.com.kh/acleda?payment_data=qWY5B2SAUfIhLblxzOtfu5ckLzMHjaSki6Ru0bsOyNK+ylPBgZ0sHH6BeGUscKoEvwWMQxRVuo9BvYnC+Eqn59mcNpvEDJ02Ykc2JeXeOQRBoJl+0Vgz3i7uyQ+CVBDyUOtXr3RaKb/Vh+YblnvX7lxl84B/WDqKJxbvUoSX43dvPirO3o6PgaJbR+2GLeVT0vQcWYuR0eqnnrc0x6xjBdGhYvdj5TxOPrC4Z/4gsl3ahJ1w6zTiFTKsYFcLFuCw&key=khqr" target="_blank" class="btn-bank btn-acleda">🏦 ACLEDA Bank</a>
-        </div>
-        <label>ភស្តុតាង (Screenshot) *</label>
-        <input type="file" id="depScreenshot" accept="image/*" required>
-        <button type="submit" class="btn btn-success" style="width:100%; margin-top:10px;">បញ្ជាក់ការទូទាត់</button>
-      </form>
-    </div>
-  </div>
-
-  <div class="modal" id="withdrawModal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('withdrawModal')">&times;</span>
-      <h2 id="withdrawTitle" style="color:#0078D7; font-size:clamp(18px,2.2vw,22px);">🏦 ស្នើសុំដកប្រាក់រង្វាន់</h2>
-      <div class="withdraw-notice" id="withdrawNotice">...</div>
-      <form id="withdrawForm">
-        <label>ជ្រើសរើសលេខឈ្នះ *</label>
-        <select id="winSelect" required><option value="">-- ជ្រើសរើស --</option></select>
-        <div style="background:#e8f4fd; border:2px dashed #0078D7; padding:6px; border-radius:6px; margin:8px 0; text-align:center;">
-          <span style="font-weight:bold;">💵 រង្វាន់៖</span>
-          <span id="payoutDisplay" style="font-size:clamp(18px,2.5vw,22px); color:#28a745; font-weight:bold;">0.00</span>
-        </div>
-        <label>លេខទូរស័ព្ទ *</label>
-        <input type="tel" id="wdPhone" required placeholder="បញ្ចូលលេខទូរស័ព្ទ">
-        <label>ធនាគារ *</label>
-        <select id="wdBank" required>
-          <option value="">-- ជ្រើសរើស --</option>
-          <option value="ABA Bank">ABA Bank</option>
-          <option value="ACLEDA Bank">ACLEDA Bank</option>
-          <option value="Wing Bank">Wing Bank</option>
-          <option value="TrueMoney">TrueMoney</option>
-          <option value="Canadia Bank">Canadia Bank</option>
-        </select>
-        <label>លេខគណនី *</label>
-        <input type="text" id="wdAccNo" required placeholder="បញ្ចូលលេខគណនី">
-        <label>ឈ្មោះគណនី *</label>
-        <input type="text" id="wdAccName" required placeholder="បញ្ចូលឈ្មោះគណនី">
-        <label>QR Code គណនី *</label>
-        <input type="file" id="wdQrCode" accept="image/*" required>
-        <button type="submit" class="btn btn-withdraw" style="width:100%; margin-top:8px;">🚀 បញ្ជាក់ដកប្រាក់</button>
-      </form>
-    </div>
-  </div>
-
-  <div class="modal" id="groupModal">
-    <div class="modal-content" style="text-align:center;">
-      <span class="close" onclick="closeModal('groupModal')">&times;</span>
-      <div style="font-size:40px;">📢</div>
-      <h2 style="color:#0078D7;">ចូលក្រុម Telegram</h2>
-      <p style="font-size:clamp(12px,1.3vw,14px); color:#4a5568; margin:8px 0;">ទទួលបានព័ត៌មានថ្មីៗ!</p>
-      <a href="https://t.me/+LK-keKzRqPcxYmM1" target="_blank" class="btn btn-telegram" style="width:100%; padding:8px; text-decoration:none;">👉 ចុចចូលក្រុម</a>
-    </div>
-  </div>
-
-  <div class="modal" id="alertModal">
-    <div class="modal-content alert-modal">
-      <span class="alert-icon" id="alertIcon">🔔</span>
-      <h3 class="alert-title" id="alertTitle">ការជូនដំណឹង</h3>
-      <p class="alert-message" id="alertMessage">សារសំខាន់...</p>
-      <button class="btn btn-primary" onclick="closeModal('alertModal')" style="padding:6px 20px; border-radius:16px;">យល់ព្រម</button>
-    </div>
+    <a href="#" class="back-link" onclick="history.back(); return false;">
+      <i class="fas fa-arrow-left"></i> ត្រឡប់ក្រោយ
+    </a>
   </div>
 
   <script>
-    // ================================================================
-    // TELEGRAM CONFIG
-    // ================================================================
-    const TELEGRAM = {
-      RESULT_TOKEN: '8404060424:AAFSc2A5tAlEsmzOebSizHw2BHOy-Bnb834',
-      RESULT_CHAT: '-1004476774053',
-      
-      BET_TOKEN: '8603184541:AAHmaJnY057ywvAhh04p1NfrIYiBPo8p8TI',
-      BET_CHAT: '-1004349853491',
-      
-      WITHDRAW_TOKEN: '8822939753:AAHHgovBXqIyDPw9fBvvHG7M2oyaIGYhFIo',
-      WITHDRAW_CHAT: '-1004369245881'
-    };
+    // ============================================================
+    // DOM ELEMENTS
+    // ============================================================
+    const feeOptions = document.querySelectorAll('.fee-option');
+    const selectedAmountDisplay = document.getElementById('selectedAmount');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitStatus = document.getElementById('submitStatus');
+    const form = document.getElementById('paymentForm');
 
-    // ⚠️ សូមជំនួសដោយ Web App URL ពិតរបស់អ្នក
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx1pQy12FcF6fJPiyjO4EvbXuc6YdReM_DsOWbVhkkyb6aAmiSnE_Or6Kc3PRLey55FsQ/exec';
+    const phoneInput = document.getElementById('phone');
+    const telegramInput = document.getElementById('telegram');
+    const accountNameInput = document.getElementById('accountName');
+    const accountNumberInput = document.getElementById('accountNumber');
+    const fileInput = document.getElementById('screenshot');
+    const fileUpload = document.getElementById('fileUpload');
 
-    // ================================================================
-    // STATE
-    // ================================================================
-    let selectedTime = '12:00';
-    let betType = 'two';
-    let selectedLetter = '';
-    let numbers = [];
-    let amount = 0;
-    let currency = 'USD';
-    let cachedResults = [];
-    let isSyncing = false;
+    const phoneError = document.getElementById('phoneError');
+    const phoneValid = document.getElementById('phoneValid');
+    const telegramError = document.getElementById('telegramError');
+    const telegramValid = document.getElementById('telegramValid');
+    const accountNameError = document.getElementById('accountNameError');
+    const accountNameValid = document.getElementById('accountNameValid');
+    const accountNumberError = document.getElementById('accountNumberError');
+    const accountNumberValid = document.getElementById('accountNumberValid');
+    const fileError = document.getElementById('fileError');
+    const fileValid = document.getElementById('fileValid');
 
-    // ================================================================
-    // DATA MANAGEMENT
-    // ================================================================
-    function getBets() {
-      try { return JSON.parse(localStorage.getItem('lottery_bets') || '[]'); } catch { return []; }
-    }
+    let selectedFee = '2';
+    let isSubmitting = false;
 
-    function saveBets(bets) {
-      localStorage.setItem('lottery_bets', JSON.stringify(bets));
-    }
+    // ============================================================
+    // FEE SELECTION
+    // ============================================================
+    feeOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        feeOptions.forEach(opt => opt.classList.remove('selected'));
+        this.classList.add('selected');
+        const radio = this.querySelector('input[type="radio"]');
+        radio.checked = true;
+        selectedFee = radio.value;
+        selectedAmountDisplay.innerHTML = `${selectedFee}$ <small>USD</small>`;
+        checkFormValidity();
+      });
+    });
 
-    function addBet(bet) {
-      const bets = getBets();
-      bets.unshift(bet);
-      saveBets(bets);
-      return bets;
-    }
+    // ============================================================
+    // FILE UPLOAD
+    // ============================================================
+    const fileName = document.getElementById('fileName');
+    const filePreview = document.getElementById('filePreview');
+    const previewImage = document.getElementById('previewImage');
 
-    function updateBet(id, updates) {
-      const bets = getBets();
-      const idx = bets.findIndex(b => b.id === id);
-      if (idx !== -1) {
-        bets[idx] = { ...bets[idx], ...updates };
-        saveBets(bets);
+    fileInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        fileUpload.classList.add('has-file');
+        fileUpload.classList.remove('error');
+        fileName.textContent = '📎 ' + file.name;
+        fileError.classList.remove('show');
+        fileValid.classList.add('show');
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewImage.src = e.target.result;
+          filePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        fileUpload.classList.remove('has-file');
+        fileName.textContent = '';
+        filePreview.style.display = 'none';
+        previewImage.src = '';
+        fileValid.classList.remove('show');
+      }
+      checkFormValidity();
+    });
+
+    // ============================================================
+    // VALIDATION
+    // ============================================================
+    function validatePhone() {
+      const value = phoneInput.value.trim();
+      const phoneRegex = /^(0[1-9]{1}[0-9]{7,8})$/;
+      if (value && phoneRegex.test(value)) {
+        phoneInput.classList.remove('error');
+        phoneInput.classList.add('valid');
+        phoneError.classList.remove('show');
+        phoneValid.classList.add('show');
         return true;
-      }
-      return false;
-    }
-
-    // ================================================================
-    // HELPERS
-    // ================================================================
-    function getReqLen() { return betType === 'two' ? 2 : 3; }
-
-    function showAlert(title, msg, icon = '🔔') {
-      document.getElementById('alertIcon').textContent = icon;
-      document.getElementById('alertTitle').textContent = title;
-      document.getElementById('alertMessage').textContent = msg;
-      document.getElementById('alertModal').style.display = 'block';
-    }
-
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-    function showSection(name, evt) {
-      document.getElementById('homeSection').style.display = name === 'home' ? 'block' : 'none';
-      document.getElementById('historySection').style.display = name === 'history' ? 'block' : 'none';
-      document.getElementById('rulesSection').style.display = name === 'rules' ? 'block' : 'none';
-      document.querySelectorAll('.nav-bar a').forEach(a => a.classList.remove('active'));
-      if (evt && evt.target) evt.target.classList.add('active');
-    }
-
-    function copyLink() {
-      const url = window.location.href;
-      navigator.clipboard.writeText(url).then(() => showAlert('ជោគជ័យ!', '📋 បានចម្លងទំព័រ!', '🔗'))
-        .catch(() => showAlert('បរាជ័យ', '🌐 ចម្លងដោយខ្លួនឯង៖\n' + url, '🔗'));
-    }
-
-    function contactAdmin() { window.open('https://t.me/Sreypich8889999', '_blank'); }
-    function openGroup() { document.getElementById('groupModal').style.display = 'block'; }
-
-    // ================================================================
-    // TELEGRAM SEND
-    // ================================================================
-    async function sendPhoto(token, chatId, file, caption) {
-      const fd = new FormData();
-      fd.append('chat_id', chatId);
-      fd.append('photo', file);
-      fd.append('caption', caption);
-      fd.append('parse_mode', 'HTML');
-      return fetch(`https://api.telegram.org/bot${token}/sendPhoto`, { method: 'POST', body: fd });
-    }
-
-    // ================================================================
-    // FETCH RESULTS FROM WEB APP
-    // ================================================================
-    async function checkResults() {
-      if (isSyncing) return;
-      isSyncing = true;
-      const syncEl = document.getElementById('syncStatus');
-      syncEl.textContent = '⏳ កំពុងទាញទិន្នន័យ...';
-      syncEl.className = 'sync-pending';
-
-      try {
-        const res = await fetch(WEB_APP_URL + '?action=getResults&limit=30');
-        const data = await res.json();
-        if (data.ok && data.results) {
-          cachedResults = data.results;
-          localStorage.setItem('telegram_results_cache', JSON.stringify(cachedResults));
-          updateResultsUI();
-          renderHistoryTable();
-          syncEl.textContent = '✅ រួចរាល់';
-          syncEl.className = 'sync-status';
-        } else {
-          syncEl.textContent = '⚠️ មិនមានទិន្នន័យ';
-          syncEl.className = 'sync-pending';
-        }
-      } catch (err) {
-        console.error('Error fetching results:', err);
-        const cached = localStorage.getItem('telegram_results_cache');
-        if (cached) {
-          try {
-            cachedResults = JSON.parse(cached);
-            updateResultsUI();
-            renderHistoryTable();
-          } catch(e) {}
-        }
-        syncEl.textContent = '❌ កំហុស';
-        syncEl.className = 'sync-pending';
-      }
-      isSyncing = false;
-    }
-
-    // ================================================================
-    // BET FUNCTIONS
-    // ================================================================
-    function setTime(t, evt) {
-      selectedTime = t;
-      document.querySelectorAll('.time-selector .time-btn').forEach(b => b.classList.remove('active'));
-      if (evt && evt.target) evt.target.classList.add('active');
-      updateConfig();
-    }
-
-    function setType(t, evt) {
-      betType = t;
-      document.querySelectorAll('.type-selector .type-btn').forEach(b => b.classList.remove('active'));
-      if (evt && evt.target) evt.target.classList.add('active');
-      numbers = [];
-      updateDisplay();
-      updateConfig();
-      const inp = document.getElementById('numInput');
-      if (selectedLetter) {
-        inp.placeholder = t === 'two' ? 'បញ្ចូល ២ខ្ទង់ (ឧ. 01,02)' : 'បញ្ចូល ៣ខ្ទង់ (ឧ. 123,456)';
-      }
-    }
-
-    function updateConfig() {
-      document.getElementById('configBadge').textContent =
-        `${selectedTime} | ${betType === 'two' ? '២ខ្ទង់' : '៣ខ្ទង់'}`;
-    }
-
-    function selectLetter(l, evt) {
-      selectedLetter = l;
-      document.querySelectorAll('.letter-circle').forEach(el => el.classList.remove('active'));
-      if (evt && evt.target) evt.target.classList.add('active');
-      const inp = document.getElementById('numInput');
-      inp.disabled = false;
-      inp.placeholder = betType === 'two' ? `បញ្ចូល ២ខ្ទង់សម្រាប់ ${l}` : `បញ្ចូល ៣ខ្ទង់សម្រាប់ ${l}`;
-      inp.focus();
-      document.getElementById('btnAdd').disabled = false;
-    }
-
-    function formatInput() {
-      const inp = document.getElementById('numInput');
-      let val = inp.value.replace(/[^0-9]/g, '');
-      const len = getReqLen();
-      let parts = [];
-      for (let i = 0; i < val.length; i += len) {
-        let chunk = val.substring(i, i + len);
-        if (chunk.length > 0) parts.push(chunk);
-      }
-      inp.value = parts.join(',');
-    }
-
-    document.getElementById('numInput').addEventListener('input', formatInput);
-
-    function addNumber() {
-      const inp = document.getElementById('numInput');
-      let raw = inp.value.trim();
-      if (!selectedLetter) { showAlert('ការព្រមាន', 'សូមជ្រើសរើស A-E ជាមុន!', '⚠️'); return; }
-      if (!raw) { showAlert('ការព្រមាន', 'សូមបញ្ចូលលេខ!', '⚠️'); return; }
-
-      const len = getReqLen();
-      let items = raw.split(',').map(s => s.trim().replace(/[^0-9]/g, ''));
-      let valid = items.filter(s => s.length === len);
-
-      if (valid.length === 0) { showAlert('ការព្រមាន', `សូមបញ្ចូលលេខ ${len} ខ្ទង់!`, '⚠️'); return; }
-
-      let added = 0;
-      for (let n of valid) {
-        if (numbers.length >= 10) { showAlert('ការព្រមាន', 'ចាក់បានត្រឹមតែ 10 លេខ!', '⚠️'); break; }
-        const tag = `${selectedLetter}:${n}`;
-        if (!numbers.includes(tag)) { numbers.push(tag); added++; }
-      }
-      inp.value = '';
-      updateDisplay();
-      inp.focus();
-    }
-
-    function removeNum(idx) {
-      numbers.splice(idx, 1);
-      updateDisplay();
-    }
-
-    function updateDisplay() {
-      const container = document.getElementById('selectedDisplay');
-      const countEl = document.getElementById('countDisplay');
-      if (numbers.length === 0) {
-        container.innerHTML = '<span style="color:#6c757d; font-size:clamp(11px,1.2vw,12px);">មិនទាន់មានលេខ</span>';
-        countEl.textContent = '0';
       } else {
-        container.innerHTML = numbers.map((n, i) =>
-          `<span class="selected-tag">${n} <span class="remove" onclick="removeNum(${i})">&times;</span></span>`
-        ).join('');
-        countEl.textContent = numbers.length;
-      }
-      updateSummary();
-    }
-
-    function setAmount(val, sym) {
-      document.getElementById('amountInput').value = val;
-      document.getElementById('currencySelect').value = sym === '$' ? 'USD' : 'KHR';
-      updateAmount();
-    }
-
-    function updateAmount() {
-      const v = parseFloat(document.getElementById('amountInput').value);
-      const c = document.getElementById('currencySelect').value;
-      amount = isNaN(v) || v <= 0 ? 0 : v;
-      currency = c;
-      const warn = document.getElementById('limitWarning');
-      if (amount > 0) {
-        if (currency === 'USD') {
-          warn.style.display = (amount < 0.25 || amount > 10) ? 'block' : 'none';
+        phoneInput.classList.remove('valid');
+        if (value) {
+          phoneInput.classList.add('error');
+          phoneError.classList.add('show');
         } else {
-          warn.style.display = (amount < 500 || amount > 40000) ? 'block' : 'none';
+          phoneInput.classList.remove('error');
+          phoneError.classList.remove('show');
         }
-      } else { warn.style.display = 'none'; }
-      updateSummary();
-    }
-
-    function updateSummary() {
-      const cnt = numbers.length;
-      document.getElementById('totalCount').textContent = cnt;
-      let valid = false;
-      if (currency === 'USD') valid = (amount >= 0.25 && amount <= 10);
-      else valid = (amount >= 500 && amount <= 40000);
-      const total = cnt * amount;
-      const display = currency === 'USD' ? `${total.toFixed(2)}$` : `${total.toLocaleString()}៛`;
-      document.getElementById('totalAmountDisplay').textContent = display;
-      document.getElementById('btnSubmit').disabled = !(cnt > 0 && valid && amount > 0);
-    }
-
-    // ================================================================
-    // SUBMIT BET
-    // ================================================================
-    function submitBet() {
-      if (numbers.length === 0) { showAlert('ការព្រមាន', 'សូមជ្រើសរើសយ៉ាងហោចណាស់មួយលេខ!', '⚠️'); return; }
-      const total = numbers.length * amount;
-      const display = currency === 'USD' ? `${total.toFixed(2)}$` : `${total.toLocaleString()}៛`;
-      document.getElementById('confirmNumbers').textContent = numbers.join(', ');
-      document.getElementById('confirmTotal').textContent = display;
-      document.getElementById('depositModal').style.display = 'block';
-    }
-
-    document.getElementById('depositForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const phone = document.getElementById('depPhone').value.trim();
-      const bank = document.getElementById('depBank').value;
-      const name = document.getElementById('depAccName').value.trim();
-      const file = document.getElementById('depScreenshot');
-
-      if (!phone || !bank || !name || !file.files[0]) {
-        showAlert('ការព្រមាន', 'សូមបំពេញព័ត៌មាន និងភ្ជាប់ភស្តុតាង!', '⚠️');
-        return;
-      }
-
-      const total = numbers.length * amount;
-      const per = currency === 'USD' ? `${amount}$` : `${amount}៛`;
-      const totalD = currency === 'USD' ? `${total.toFixed(2)}$` : `${total.toLocaleString()}៛`;
-      const now = new Date();
-      const exp = new Date(now);
-      exp.setDate(exp.getDate() + 1);
-
-      const bet = {
-        id: 'BET-' + Date.now(),
-        date: now.toISOString(),
-        dateStr: now.toLocaleDateString('km-KH'),
-        drawTime: selectedTime,
-        phone: phone,
-        numbers: [...numbers],
-        type: betType,
-        amount: amount,
-        currency: currency,
-        total: total,
-        bank: bank,
-        name: name,
-        status: 'pending',
-        claimed: false,
-        expire: exp.toISOString()
-      };
-
-      const btn = e.target.querySelector('button[type="submit"]');
-      btn.disabled = true;
-      btn.textContent = 'កំពុងបញ្ជូន...';
-
-      addBet(bet);
-
-      try {
-        const payload = {
-          action: 'placeBet',
-          phone: phone,
-          numbers: numbers,
-          type: betType,
-          amount: amount,
-          currency: currency,
-          total: total,
-          bank: bank,
-          name: name,
-          drawTime: selectedTime
-        };
-
-        const res = await fetch(WEB_APP_URL, {
-          method: 'POST',
-          body: JSON.stringify(payload),
-          headers: { 'Content-Type': 'text/plain' }
-        });
-        const data = await res.json();
-        
-        if (data.ok) {
-          const msg = `🎯 <b>ការចាក់ឆ្នោតថ្មី</b>\n\n` +
-            `🆔 លេខកូដ: <code>${data.betId}</code>\n` +
-            `🕒 ម៉ោង: <b>${selectedTime}</b>\n` +
-            `📱 ទូរស័ព្ទ: <code>${phone}</code>\n` +
-            `🏦 ធនាគារ: ${bank}\n` +
-            `👤 ឈ្មោះ: ${name}\n` +
-            `🔢 ប្រភេទ: ${betType === 'two' ? '២ខ្ទង់' : '៣ខ្ទង់'}\n` +
-            `🎯 លេខ: <b>${numbers.join(', ')}</b>\n` +
-            `💵 ក្នុងមួយលេខ: ${per}\n` +
-            `💰 សរុប: <b>${totalD}</b>\n` +
-            `⏰ ចាក់: ${now.toLocaleString('km-KH')}`;
-
-          await sendPhoto(TELEGRAM.BET_TOKEN, TELEGRAM.BET_CHAT, file.files[0], msg);
-
-          showAlert('ជោគជ័យ', '✅ ការចាក់ឆ្នោតត្រូវបានបញ្ជូន!', '🎉');
-          closeModal('depositModal');
-          numbers = [];
-          updateDisplay();
-          renderUserBets();
-          document.getElementById('depositForm').reset();
-        } else {
-          showAlert('បរាជ័យ', '❌ មានបញ្ហាក្នុងការបញ្ជូន!', '❌');
-        }
-      } catch (err) {
-        console.error('Error:', err);
-        showAlert('បរាជ័យ', '❌ មានបញ្ហាក្នុងការតភ្ជាប់!', '❌');
-      }
-      btn.disabled = false;
-      btn.textContent = 'បញ្ជាក់ការទូទាត់';
-    });
-
-    // ================================================================
-    // RENDER USER BETS
-    // ================================================================
-    function renderUserBets() {
-      const bets = getBets();
-      const tbody = document.getElementById('userHistoryBody');
-      const now = new Date();
-      let updated = false;
-
-      bets.forEach(b => {
-        if (b.status === 'pending' && b.expire) {
-          if (new Date(b.expire) < now) { b.status = 'expired'; updated = true; }
-        }
-      });
-      if (updated) saveBets(bets);
-
-      if (bets.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="color:#6c757d; padding:8px;">មិនទាន់មានប្រវត្តិ</td></tr>';
-        return;
-      }
-
-      tbody.innerHTML = bets.map(b => {
-        const amt = b.currency === 'USD' ? `${b.amount}$` : `${b.amount}៛`;
-        let badge = '<span class="status-badge status-pending">⏳ រង់ចាំ</span>';
-        let reward = '-';
-        if (b.status === 'win') {
-          badge = '<span class="status-badge status-win">🎉 ឈ្នះ</span>';
-          if (b.claimed) badge += ' <span style="background:#6c757d;color:#fff;padding:1px 5px;border-radius:4px;font-size:9px;">ដក</span>';
-          else badge += ' <span class="new-win-badge">អាចដក</span>';
-          const payout = b.type === 'two' ? b.amount * 70 : b.amount * 500;
-          reward = b.currency === 'USD' ? `<strong style="color:#28a745;">${payout.toFixed(2)}$</strong>` : `<strong style="color:#28a745;">${payout.toLocaleString()}៛</strong>`;
-        } else if (b.status === 'loss') {
-          badge = '<span class="status-badge status-loss">❌ មិនត្រូវ</span>';
-        } else if (b.status === 'expired') {
-          badge = '<span class="status-badge status-loss">⏰ ផុតកំណត់</span>';
-        }
-        return `<tr>
-          <td>${b.dateStr} (${b.drawTime})</td>
-          <td><code>${b.phone}</code></td>
-          <td><strong style="color:#0078D7;">${b.numbers.join(', ')}</strong></td>
-          <td>${b.type === 'two' ? '២ខ្ទង់' : '៣ខ្ទង់'}</td>
-          <td>${amt}</td>
-          <td>${badge}</td>
-          <td>${reward}</td>
-        </tr>`;
-      }).join('');
-    }
-
-    // ================================================================
-    // WITHDRAW
-    // ================================================================
-    function openWithdraw(mode) {
-      const modal = document.getElementById('withdrawModal');
-      const title = document.getElementById('withdrawTitle');
-      const notice = document.getElementById('withdrawNotice');
-      if (mode === 'late') {
-        title.textContent = '🏦 ដកប្រាក់រង្វាន់ / ⏰ ដកយឺត';
-        notice.innerHTML = '⚠️ <strong>យឺតពេលកំណត់</strong> សុពលភាព ២៤ ម៉ោង';
-      } else {
-        title.textContent = '🏦 ដកប្រាក់រង្វាន់';
-        notice.innerHTML = '✅ ដកបានបន្ទាប់ពី 12:00 និង 16:00 សុពលភាព ២៤ ម៉ោង';
-      }
-      populateWinSelect();
-      modal.style.display = 'block';
-    }
-
-    function populateWinSelect() {
-      const bets = getBets();
-      const sel = document.getElementById('winSelect');
-      const now = new Date();
-      const wins = bets.filter(b => {
-        if (b.status === 'win' && !b.claimed) {
-          if (b.expire && new Date(b.expire) < now) { b.status = 'expired'; saveBets(bets); return false; }
-          return true;
-        }
+        phoneValid.classList.remove('show');
         return false;
-      });
-
-      sel.innerHTML = '<option value="">-- ជ្រើសរើស --</option>';
-      if (wins.length === 0) {
-        document.getElementById('payoutDisplay').textContent = '0.00';
-      } else {
-        wins.forEach(b => {
-          const opt = document.createElement('option');
-          opt.value = b.id;
-          opt.textContent = `[${b.dateStr}] ${b.numbers.join(',')} (${b.type === 'two' ? '២ខ្ទង់' : '៣ខ្ទង់'})`;
-          sel.appendChild(opt);
-        });
       }
     }
 
-    document.getElementById('winSelect').addEventListener('change', function() {
-      const bets = getBets();
-      const id = this.value;
-      const bet = bets.find(b => b.id === id);
-      const payout = document.getElementById('payoutDisplay');
-      if (!bet) { payout.textContent = '0.00'; return; }
-      const rate = bet.type === 'two' ? 70 : 500;
-      const total = bet.amount * rate;
-      payout.textContent = bet.currency === 'USD' ? `${total.toFixed(2)}$` : `${total.toLocaleString()}៛`;
-    });
+    function validateTelegram() {
+      const value = telegramInput.value.trim();
+      const telegramRegex = /^(https?:\/\/t\.me\/[a-zA-Z0-9_]+|@[a-zA-Z0-9_]+)$/;
+      if (value && telegramRegex.test(value)) {
+        telegramInput.classList.remove('error');
+        telegramInput.classList.add('valid');
+        telegramError.classList.remove('show');
+        telegramValid.classList.add('show');
+        return true;
+      } else {
+        telegramInput.classList.remove('valid');
+        if (value) {
+          telegramInput.classList.add('error');
+          telegramError.classList.add('show');
+        } else {
+          telegramInput.classList.remove('error');
+          telegramError.classList.remove('show');
+        }
+        telegramValid.classList.remove('show');
+        return false;
+      }
+    }
 
-    document.getElementById('withdrawForm').addEventListener('submit', async function(e) {
+    function validateAccountName() {
+      const value = accountNameInput.value.trim();
+      if (value && value.length >= 2) {
+        accountNameInput.classList.remove('error');
+        accountNameInput.classList.add('valid');
+        accountNameError.classList.remove('show');
+        accountNameValid.classList.add('show');
+        return true;
+      } else {
+        accountNameInput.classList.remove('valid');
+        if (value) {
+          accountNameInput.classList.add('error');
+          accountNameError.classList.add('show');
+        } else {
+          accountNameInput.classList.remove('error');
+          accountNameError.classList.remove('show');
+        }
+        accountNameValid.classList.remove('show');
+        return false;
+      }
+    }
+
+    function validateAccountNumber() {
+      const value = accountNumberInput.value.trim();
+      if (value && value.length >= 4) {
+        accountNumberInput.classList.remove('error');
+        accountNumberInput.classList.add('valid');
+        accountNumberError.classList.remove('show');
+        accountNumberValid.classList.add('show');
+        return true;
+      } else {
+        accountNumberInput.classList.remove('valid');
+        if (value) {
+          accountNumberInput.classList.add('error');
+          accountNumberError.classList.add('show');
+        } else {
+          accountNumberInput.classList.remove('error');
+          accountNumberError.classList.remove('show');
+        }
+        accountNumberValid.classList.remove('show');
+        return false;
+      }
+    }
+
+    function validateFile() {
+      const file = fileInput.files[0];
+      if (file) {
+        fileUpload.classList.remove('error');
+        fileError.classList.remove('show');
+        fileValid.classList.add('show');
+        return true;
+      } else {
+        fileValid.classList.remove('show');
+        return false;
+      }
+    }
+
+    // ============================================================
+    // CHECK FORM VALIDITY
+    // ============================================================
+    function checkFormValidity() {
+      const isPhoneValid = validatePhone();
+      const isTelegramValid = validateTelegram();
+      const isAccountNameValid = validateAccountName();
+      const isAccountNumberValid = validateAccountNumber();
+      const isFileValid = validateFile();
+      const allValid = isPhoneValid && isTelegramValid && isAccountNameValid && isAccountNumberValid && isFileValid;
+
+      if (allValid) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('disabled');
+        submitStatus.className = 'submit-status show ready';
+        submitStatus.innerHTML = '<i class="fas fa-check-circle"></i> ព័ត៌មានទាំងអស់ត្រឹមត្រូវ! អ្នកអាចផ្ញើព័ត៌មានទូទាត់បាន។';
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('disabled');
+        submitStatus.className = 'submit-status show incomplete';
+        submitStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> សូមបំពេញព័ត៌មានឲ្យបានពេញលេញ និងត្រឹមត្រូវមុនពេលផ្ញើ';
+      }
+    }
+
+    phoneInput.addEventListener('input', checkFormValidity);
+    telegramInput.addEventListener('input', checkFormValidity);
+    accountNameInput.addEventListener('input', checkFormValidity);
+    accountNumberInput.addEventListener('input', checkFormValidity);
+
+    // ============================================================
+    // ALERT
+    // ============================================================
+    function showAlert(message, type = 'error') {
+      const alertEl = document.getElementById('alert');
+      alertEl.className = 'alert';
+      alertEl.innerHTML = `<span class="alert-icon">${type === 'error' ? '❌' : '✅'}</span> ${message}`;
+      alertEl.classList.add(type);
+      clearTimeout(window.alertTimeout);
+      window.alertTimeout = setTimeout(() => {
+        alertEl.className = 'alert';
+      }, 6000);
+    }
+
+    // ============================================================
+    // SEND TO TELEGRAM (FIXED - USING fileInput.files[0] DIRECTLY)
+    // ============================================================
+    function sendToTelegram(file) {
+      // ⚠️ Bot Token and Chat ID
+      const BOT_TOKEN = '8364652665:AAESgPsrL-Q2D3ZYtLTN6IzdkQ1pLYnc5vw';
+      const CHAT_ID = '-1003896872409';
+
+      console.log('🚀 Starting send to Telegram...');
+      console.log('📝 Bot Token:', BOT_TOKEN.substring(0, 10) + '...');
+      console.log('📝 Chat ID:', CHAT_ID);
+      console.log('📎 File:', file ? file.name : 'No file');
+
+      // Check token
+      if (!BOT_TOKEN || BOT_TOKEN.length < 10) {
+        showAlert('❌ Bot Token មិនត្រឹមត្រូវ!', 'error');
+        return Promise.reject(new Error('Invalid token'));
+      }
+
+      if (!file) {
+        showAlert('❌ សូមភ្ជាប់រូបភាពថតអេក្រង់!', 'error');
+        return Promise.reject(new Error('No file'));
+      }
+
+      // Check file size
+      if (file.size > 10 * 1024 * 1024) {
+        showAlert('❌ ឯកសារធំពេក! សូមប្រើរូបភាពតូចជាង 10MB។', 'error');
+        return Promise.reject(new Error('File too large'));
+      }
+
+      // Get form values
+      const phone = document.getElementById('phone').value.trim();
+      const telegram = document.getElementById('telegram').value.trim();
+      const accountName = document.getElementById('accountName').value.trim();
+      const accountNumber = document.getElementById('accountNumber').value.trim();
+      const feeLabel = selectedFee === '2' ? '📄 ថ្លៃសេវាផ្ញើព័ត៌មាន' : '✅ ថ្លៃសេវាជោគជ័យ';
+
+      const now = new Date();
+      const dateTime = now.toLocaleString('km-KH', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+
+      const caption = `💳 *ការទូទាត់ថ្លៃសេវាកម្មជ្រើសរើសបុគ្គលិក*\n\n` +
+        `📱 *លេខទូរស័ព្ទ:* ${phone}\n` +
+        `📌 *តេឡេក្រាម:* ${telegram}\n` +
+        `🏦 *ឈ្មោះគណនី:* ${accountName}\n` +
+        `🔢 *លេខគណនី:* ${accountNumber}\n` +
+        `💰 *ថ្លៃសេវា:* ${selectedFee}$ USD (${feeLabel})\n` +
+        `🕐 *កាលបរិច្ឆេទ:* ${dateTime}\n\n` +
+        `✅ សូមផ្ទៀងផ្ទាត់ការទូទាត់នេះ។`;
+
+      // Create FormData for Telegram
+      const telegramFormData = new FormData();
+      telegramFormData.append('chat_id', CHAT_ID);
+      telegramFormData.append('photo', file);
+      telegramFormData.append('caption', caption);
+      telegramFormData.append('parse_mode', 'Markdown');
+
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`;
+      console.log('🌐 Sending to:', url);
+
+      return fetch(url, {
+        method: 'POST',
+        body: telegramFormData
+      })
+      .then(response => {
+        console.log('📡 Response status:', response.status);
+        if (!response.ok) {
+          return response.json().then(err => {
+            console.error('❌ Telegram error:', err);
+            throw new Error(err.description || `HTTP ${response.status}`);
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('✅ Telegram response:', data.ok ? 'Success' : 'Failed');
+        if (data && data.ok) {
+          return data;
+        } else {
+          throw new Error(data.description || 'Unknown error');
+        }
+      });
+    }
+
+    // ============================================================
+    // FORM SUBMISSION (FIXED)
+    // ============================================================
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const id = document.getElementById('winSelect').value;
-      const phone = document.getElementById('wdPhone').value.trim();
-      const bank = document.getElementById('wdBank').value;
-      const accNo = document.getElementById('wdAccNo').value.trim();
-      const accName = document.getElementById('wdAccName').value.trim();
-      const qr = document.getElementById('wdQrCode');
+      console.log('🔄 Form submitted');
 
-      if (!id || !phone || !bank || !accNo || !accName || !qr.files[0]) {
-        showAlert('ការព្រមាន', 'សូមបំពេញព័ត៌មានទាំងអស់!', '⚠️');
+      if (isSubmitting) {
+        showAlert('កំពុងដំណើរការ... សូមរង់ចាំបន្តិច!', 'error');
         return;
       }
 
-      const bets = getBets();
-      const bet = bets.find(b => b.id === id);
-      if (!bet) { showAlert('កំហុស', 'មិនរកឃើញប្រវត្តិ!', '❌'); return; }
-      if (bet.expire && new Date(bet.expire) < new Date()) {
-        showAlert('កំហុស', '⏰ លេខនេះផុតកំណត់ហើយ! (២៤ ម៉ោង)', '⏰');
+      // Validate
+      checkFormValidity();
+      if (submitBtn.disabled) {
+        showAlert('សូមបំពេញព័ត៌មានឲ្យបានត្រឹមត្រូវ!', 'error');
         return;
       }
 
-      const rate = bet.type === 'two' ? 70 : 500;
-      const total = bet.amount * rate;
-      const display = bet.currency === 'USD' ? `${total.toFixed(2)}$` : `${total.toLocaleString()}៛`;
+      const file = fileInput.files[0];
+      console.log('📎 File from input:', file ? file.name : 'No file selected');
 
-      const btn = this.querySelector('button[type="submit"]');
-      btn.disabled = true;
-      btn.textContent = 'កំពុងបញ្ជូន...';
+      if (!file) {
+        showAlert('សូមភ្ជាប់រូបភាពថតអេក្រង់!', 'error');
+        return;
+      }
 
-      try {
-        const payload = {
-          action: 'requestWithdraw',
-          phone: phone,
-          numbers: bet.numbers.join(', '),
-          reward: display,
-          bank: bank,
-          accNo: accNo,
-          accName: accName
-        };
+      // Start submission
+      isSubmitting = true;
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+      console.log('⏳ Submitting...');
 
-        const res = await fetch(WEB_APP_URL, {
-          method: 'POST',
-          body: JSON.stringify(payload),
-          headers: { 'Content-Type': 'text/plain' }
+      sendToTelegram(file)
+        .then(data => {
+          console.log('✅ Success!');
+          document.getElementById('successMessage').style.display = 'block';
+          showAlert('✅ ព័ត៌មានទូទាត់ត្រូវបានផ្ញើជោគជ័យ!', 'success');
+
+          // Reset after 5 seconds
+          setTimeout(() => {
+            form.reset();
+            document.getElementById('successMessage').style.display = 'none';
+            fileUpload.classList.remove('has-file');
+            fileName.textContent = '';
+            filePreview.style.display = 'none';
+            previewImage.src = '';
+            document.querySelectorAll('.form-group .valid').forEach(el => el.classList.remove('valid'));
+            document.querySelectorAll('.valid-text.show').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('.error-text.show').forEach(el => el.classList.remove('show'));
+            fileUpload.classList.remove('error');
+            resetSubmitButton();
+          }, 5000);
+        })
+        .catch(error => {
+          console.error('❌ Error:', error);
+          showAlert(`❌ ${error.message || 'មានបញ្ហាក្នុងការផ្ញើព័ត៌មាន!'}`, 'error');
+          resetSubmitButton();
         });
-        const data = await res.json();
-
-        if (data.ok) {
-          const msg = `🏦 <b>ស្នើសុំដកប្រាក់រង្វាន់</b>\n\n` +
-            `🆔 លេខកូដ: <code>${data.withdrawId}</code>\n` +
-            `📱 ទូរស័ព្ទ: <code>${phone}</code>\n` +
-            `🎯 លេខចាក់: <b>${bet.numbers.join(', ')}</b>\n` +
-            `💰 រង្វាន់: <b>${display}</b>\n` +
-            `🏦 ធនាគារ: ${bank}\n` +
-            `💳 គណនី: <code>${accNo}</code>\n` +
-            `👤 ឈ្មោះ: ${accName}\n` +
-            `⏰ ស្នើ: ${new Date().toLocaleString('km-KH')}`;
-
-          await sendPhoto(TELEGRAM.WITHDRAW_TOKEN, TELEGRAM.WITHDRAW_CHAT, qr.files[0], msg);
-
-          updateBet(id, { claimed: true });
-          showAlert('ជោគជ័យ', '✅ ស្នើសុំដកប្រាក់ត្រូវបានបញ្ជូន!', '🎉');
-          closeModal('withdrawModal');
-          renderUserBets();
-          this.reset();
-        } else {
-          showAlert('បរាជ័យ', '❌ មានបញ្ហាក្នុងការបញ្ជូន!', '❌');
-        }
-      } catch (err) {
-        console.error('Error:', err);
-        showAlert('បរាជ័យ', '❌ មានបញ្ហាក្នុងការតភ្ជាប់!', '❌');
-      }
-      btn.disabled = false;
-      btn.textContent = '🚀 បញ្ជាក់ដកប្រាក់';
     });
 
-    // ================================================================
-    // UPDATE UI
-    // ================================================================
-    function updateResultsUI() {
-      const now = new Date();
-      const h = now.getHours();
-      const today = now.toLocaleDateString('km-KH');
-
-      const todayResults = cachedResults.filter(r => r.date === today);
-      const posts = ['A', 'B', 'C', 'D', 'E'];
-
-      // 12:00 results
-      const has12 = todayResults.some(r => r.time && r.time.includes('12:00'));
-      const badge12 = document.getElementById('badge12');
-
-      if (h >= 12 && has12) {
-        badge12.textContent = '✅ ចេញហើយ';
-        badge12.className = 'badge badge-completed';
-        ['two', 'three'].forEach(t => {
-          const r = todayResults.find(x => x.time && x.time.includes('12:00') && x.type === t);
-          const suffix = t === 'two' ? '' : '_3d_';
-          posts.forEach(p => {
-            const el = document.getElementById(`r12${suffix}${p}`);
-            if (el && r && r.results[p]) {
-              el.textContent = r.results[p];
-              el.className = 'number-result';
-            }
-          });
-        });
-      } else if (h < 12) {
-        badge12.textContent = '⏳ រង់ចាំ';
-        badge12.className = 'badge badge-waiting';
-      }
-
-      // 16:00 results
-      const has16 = todayResults.some(r => r.time && r.time.includes('16:00'));
-      const badge16 = document.getElementById('badge16');
-
-      if (h >= 16 && has16) {
-        badge16.textContent = '✅ ចេញហើយ';
-        badge16.className = 'badge badge-completed';
-        ['two', 'three'].forEach(t => {
-          const r = todayResults.find(x => x.time && x.time.includes('16:00') && x.type === t);
-          const suffix = t === 'two' ? '' : '_3d_';
-          posts.forEach(p => {
-            const el = document.getElementById(`r16${suffix}${p}`);
-            if (el && r && r.results[p]) {
-              el.textContent = r.results[p];
-              el.className = 'number-result';
-            }
-          });
-        });
-      } else if (h < 16) {
-        badge16.textContent = '⏳ រង់ចាំ';
-        badge16.className = 'badge badge-waiting';
-      }
-
-      // Status bar
-      const statusEl = document.getElementById('resultStatusText');
-      if (h < 12) {
-        statusEl.textContent = '⏳ រង់ចាំ 12:00';
-        statusEl.className = 'value pending';
-      } else if (h >= 12 && h < 16) {
-        if (has12) {
-          statusEl.textContent = '✅ លទ្ធផល 12:00 ចេញហើយ! រង់ចាំ 16:00';
-          statusEl.className = 'value';
-        } else {
-          statusEl.textContent = '⏳ កំពុងដំណើរការ 12:00...';
-          statusEl.className = 'value pending';
-        }
-      } else {
-        if (has16) {
-          statusEl.textContent = '✅ លទ្ធផល 16:00 ចេញហើយ! រង់ចាំថ្ងៃស្អែក';
-          statusEl.className = 'value';
-        } else {
-          statusEl.textContent = '⏳ រង់ចាំ 16:00...';
-          statusEl.className = 'value pending';
-        }
-      }
+    function resetSubmitButton() {
+      isSubmitting = false;
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+      checkFormValidity();
+      console.log('🔁 Reset submit button');
     }
 
-    function renderHistoryTable() {
-      const tbody = document.getElementById('historyBody');
-      if (cachedResults.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="color:#6c757d; padding:8px;">មិនទាន់មានប្រវត្តិ</td></tr>';
-        return;
-      }
-
-      // Group by date + time
-      const grouped = {};
-      cachedResults.forEach(r => {
-        const key = r.date + '|' + r.time;
-        if (!grouped[key]) grouped[key] = { date: r.date, time: r.time, two: null, three: null };
-        if (r.type === 'two') grouped[key].two = r;
-        if (r.type === 'three') grouped[key].three = r;
-      });
-
-      let html = '';
-      Object.values(grouped).forEach(g => {
-        const fmt = (r) => {
-          if (!r || !r.results) return '<span style="color:#dc3545;">⏳ រង់ចាំ</span>';
-          return `<b style="color:#28a745;">A:${r.results.A} B:${r.results.B} C:${r.results.C} D:${r.results.D} E:${r.results.E}</b>`;
-        };
-        html += `<tr>
-          <td><strong>${g.date}</strong></td>
-          <td>${g.time}</td>
-          <td>${fmt(g.two)}</td>
-          <td>${fmt(g.three)}</td>
-        </tr>`;
-      });
-      tbody.innerHTML = html;
-    }
-
-    // ================================================================
-    // CLOCK & COUNTDOWN
-    // ================================================================
-    function updateClock() {
-      const now = new Date();
-      document.getElementById('widgetTime').textContent = now.toLocaleTimeString('km-KH', { hour12: false });
-      document.getElementById('widgetDate').textContent = now.toLocaleDateString('km-KH', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
-      const h = now.getHours();
-      let target = 12, label = '🕛 12:00';
-      if (h >= 12 && h < 16) { target = 16; label = '🕓 16:00'; }
-      else if (h >= 16) { target = 36; label = '🕛 12:00 ថ្ងៃស្អែក'; }
-      const t = new Date(now);
-      if (target === 36) { t.setDate(t.getDate() + 1); t.setHours(12, 0, 0, 0); }
-      else t.setHours(target, 0, 0, 0);
-      const diff = Math.floor((t - now) / 1000);
-      const hrs = String(Math.floor(diff / 3600)).padStart(2, '0');
-      const mins = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
-      const secs = String(diff % 60).padStart(2, '0');
-      document.getElementById('countdownDisplay').textContent = `${hrs}:${mins}:${secs}`;
-      document.getElementById('nextTimeLabel').textContent = `🎯 ពេលបន្ទាប់៖ ${label}`;
-
-      const statusLabel = document.getElementById('statusTimeLabel');
-      if (h < 12) {
-        statusLabel.textContent = '⏳ រង់ចាំ 12:00';
-        statusLabel.style.color = '#dc3545';
-      } else if (h >= 12 && h < 16) {
-        statusLabel.textContent = '⏳ រង់ចាំ 16:00';
-        statusLabel.style.color = '#dc3545';
-      } else {
-        statusLabel.textContent = '✅ លទ្ធផលថ្ងៃនេះចេញហើយ!';
-        statusLabel.style.color = '#28a745';
-      }
-    }
-
-    // ================================================================
+    // ============================================================
     // INIT
-    // ================================================================
-    async function init() {
-      renderUserBets();
-      updateConfig();
-      updateDisplay();
-
-      const cached = localStorage.getItem('telegram_results_cache');
-      if (cached) {
-        try { cachedResults = JSON.parse(cached); } catch (e) { cachedResults = []; }
-      }
-
-      updateResultsUI();
-      renderHistoryTable();
-      updateClock();
-
-      // Fetch from Web App
-      await checkResults();
-
-      setInterval(updateClock, 1000);
-      setInterval(checkResults, 60000);
-    }
-
-    document.addEventListener('DOMContentLoaded', init);
-    window.onclick = function(e) {
-      if (e.target.classList.contains('modal')) e.target.style.display = 'none';
-    };
+    // ============================================================
+    checkFormValidity();
+    console.log('✅ Page loaded successfully');
   </script>
+
 </body>
 </html>
